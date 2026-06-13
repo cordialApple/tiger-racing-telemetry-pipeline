@@ -33,7 +33,7 @@ def ingest(db):
 
 
 def serve():
-    uvicorn.run("dashboard.api:app", host=config.API_HOST, port=config.API_PORT)
+    uvicorn.run("api.app:app", host=config.API_HOST, port=config.API_PORT)
 
 
 def main():

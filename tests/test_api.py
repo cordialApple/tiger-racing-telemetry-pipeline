@@ -1,8 +1,8 @@
 from fastapi.testclient import TestClient
 
-from dashboard import api
+from api import app
 
-client = TestClient(api.app)
+client = TestClient(app.app)
 
 CATALOG = [
     {"session_id": "s1", "source_file": "1.csv", "vehicle": "TR23", "racer": "A",
@@ -37,7 +37,7 @@ def patch_query(monkeypatch, rows, capture=None):
         if capture is not None:
             capture.append((sql, params))
         return rows
-    monkeypatch.setattr(api, "run_query", fake)
+    monkeypatch.setattr(app, "run_query", fake)
 
 
 def patch_scalar(monkeypatch, value, capture=None):
@@ -45,7 +45,7 @@ def patch_scalar(monkeypatch, value, capture=None):
         if capture is not None:
             capture.append((sql, params))
         return value
-    monkeypatch.setattr(api, "scalar", fake)
+    monkeypatch.setattr(app, "scalar", fake)
 
 
 def test_health_ok(monkeypatch):
@@ -56,7 +56,7 @@ def test_health_ok(monkeypatch):
 def test_health_failure(monkeypatch):
     def boom(sql, params=()):
         raise RuntimeError("no db")
-    monkeypatch.setattr(api, "run_query", boom)
+    monkeypatch.setattr(app, "run_query", boom)
     assert client.get("/health").status_code == 503
 
 
