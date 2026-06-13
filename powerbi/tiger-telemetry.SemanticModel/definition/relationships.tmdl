@@ -1,0 +1,16 @@
+relationship 'Channels_session_id to Sessions_session_id'
+	fromColumn: Channels.session_id
+	toColumn: Sessions.session_id
+
+relationship 'Readings_channel_key to Channels_channel_key'
+	fromColumn: Readings.channel_key
+	toColumn: Channels.channel_key
+
+relationship 'Stats_channel_key to Channels_channel_key'
+	fromColumn: Stats.channel_key
+	toColumn: Channels.channel_key
+
+relationship 'Channels_sensor_name to Sensors_sensor_name'
+	fromColumn: Channels.sensor_name
+	toColumn: Sensors.sensor_name
+

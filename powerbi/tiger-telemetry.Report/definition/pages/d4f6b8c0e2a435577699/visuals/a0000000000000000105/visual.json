@@ -1,0 +1,143 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "a0000000000000000105",
+  "position": {
+    "x": 16,
+    "y": 136,
+    "z": 500,
+    "height": 280,
+    "width": 620
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sessions"
+                    }
+                  },
+                  "Property": "Session Label"
+                }
+              },
+              "queryRef": "Sessions.Session Label",
+              "nativeQueryRef": "Session Label",
+              "active": true
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Peak Lateral G"
+                }
+              },
+              "queryRef": "Readings.Peak Lateral G",
+              "nativeQueryRef": "Peak Lateral G",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Min Oil P at 8k (bar)"
+                }
+              },
+              "queryRef": "Readings.Min Oil P at 8k (bar)",
+              "nativeQueryRef": "Min Oil P at 8k (bar)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'More grip, less oil: min oil pressure at 8k+ RPM vs peak lateral G'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f407a88e41730776e721",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Sessions"
+              }
+            },
+            "Property": "Session Label"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "40660608001a8c2d0203",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Readings"
+              }
+            },
+            "Property": "Peak Lateral G"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b602c7a4360493bc9ec6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Readings"
+              }
+            },
+            "Property": "Min Oil P at 8k (bar)"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

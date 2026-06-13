@@ -7,3 +7,7 @@ venv/
 
 data/processed/*
 !data/processed/.gitkeep
+
+# Power BI project (PBIP) machine-local files
+**/.pbi/cache.abf
+**/.pbi/localSettings.json

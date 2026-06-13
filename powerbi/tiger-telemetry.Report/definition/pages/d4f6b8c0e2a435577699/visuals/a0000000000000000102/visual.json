@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a0000000000000000102",
+  "position": {
+    "x": 332,
+    "y": 16,
+    "z": 200,
+    "width": 300,
+    "height": 104
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Oil Dip Seconds (8k RPM)"
+                }
+              },
+              "queryRef": "Readings.Oil Dip Seconds (8k RPM)",
+              "nativeQueryRef": "Oil Dip Seconds (8k RPM)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

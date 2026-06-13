@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a000000000000000000e",
+  "position": {
+    "x": 16,
+    "y": 16,
+    "z": 100,
+    "width": 236,
+    "height": 104
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Max Coolant Temp C"
+                }
+              },
+              "queryRef": "Readings.Max Coolant Temp C",
+              "nativeQueryRef": "Max Coolant Temp C"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
