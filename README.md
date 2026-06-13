@@ -15,7 +15,8 @@ data/processed/   files move here after a successful load
 parser/           CSV cleaner, AiM parser, sensor spec loader, advisory validator
 db/               psycopg connection, schema (.sql per table), repository, views/
 loader/           ingestion pipeline (per-file error isolation)
-dashboard/        FastAPI REST API consumed by PowerBI
+api/              FastAPI REST API consumed by PowerBI (serving layer over the views)
+reports/          rendered PowerBI dashboards (screenshots) + findings writeup
 docs/             sensorspecs.md (advisory sensor ranges)
 main.py           entrypoint (ingest / serve / all)
 ```
@@ -90,6 +91,12 @@ The star-schema mapping in PowerBI:
 
 The live OpenAPI schema for setting up the connector is served at
 `http://localhost:8000/docs`.
+
+## Reports
+
+Rendered dashboards and the 2023 season analysis (oil starvation under
+cornering, cooling headroom, dead channels, throttle usage) live in
+[`reports/`](reports/README.md).
 
 ## Tests
 

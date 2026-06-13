@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException, Query
 from psycopg.rows import dict_row
 
 from db.connection import Database
-from dashboard.models import (
+from api.models import (
     Channel, ReadingPage, SensorStat, SessionCatalog,
 )
 

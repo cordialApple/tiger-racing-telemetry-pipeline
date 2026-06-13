@@ -6,7 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import config
-from dashboard import api
+from api import app
 from db.connection import Database
 from db.repository import ReadingRepository
 from db.schema_manager import SchemaManager
@@ -79,7 +79,7 @@ def _purge(conn):
 
 
 def test_api_matches_reference(loaded_db):
-    client = TestClient(api.app)
+    client = TestClient(app.app)
 
     catalog = {s["session_id"]: s for s in client.get("/sessions").json()}
     assert catalog["1"]["reading_count"] == GOLDEN["reading_count"]
@@ -114,7 +114,7 @@ def test_channels_view_has_signal_and_units(loaded_db):
 
 
 def test_readings_raw_envelope(loaded_db):
-    client = TestClient(api.app)
+    client = TestClient(app.app)
     body = client.get("/readings", params={
         "session_id": "1", "sensor": "ECU RPM", "downsample": "raw", "limit": 5,
     }).json()
@@ -128,7 +128,7 @@ def test_readings_raw_envelope(loaded_db):
 
 
 def test_readings_1hz_returns_data_after_refresh(loaded_db):
-    client = TestClient(api.app)
+    client = TestClient(app.app)
     body = client.get("/readings", params={
         "session_id": "1", "sensor": "ECU RPM", "downsample": "1hz", "limit": 5,
     }).json()
@@ -136,7 +136,7 @@ def test_readings_1hz_returns_data_after_refresh(loaded_db):
 
 
 def test_readings_all_channels_when_sensor_omitted(loaded_db):
-    client = TestClient(api.app)
+    client = TestClient(app.app)
     body = client.get("/readings", params={
         "session_id": "1", "downsample": "1hz", "limit": 100,
     }).json()
@@ -145,7 +145,7 @@ def test_readings_all_channels_when_sensor_omitted(loaded_db):
 
 
 def test_readings_pagination_is_stable(loaded_db):
-    client = TestClient(api.app)
+    client = TestClient(app.app)
     p1 = client.get("/readings", params={
         "session_id": "1", "sensor": "ECU RPM", "downsample": "raw",
         "limit": 3, "offset": 0}).json()

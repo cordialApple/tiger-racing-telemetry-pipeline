@@ -1,4 +1,4 @@
-from dashboard.models import Reading, ReadingPage, Channel, SessionCatalog, SensorStat
+from api.models import Reading, ReadingPage, Channel, SessionCatalog, SensorStat
 
 
 def test_reading_fields():
