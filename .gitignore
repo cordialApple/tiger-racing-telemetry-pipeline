@@ -8,5 +8,5 @@ venv/
 data/processed/*
 !data/processed/.gitkeep
 
-# Local design/context doc — kept out of the published repo
+# Local design/context doc, kept out of the published repo
 context.md
