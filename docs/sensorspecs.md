@@ -1,6 +1,6 @@
 # AiM Sensor Specifications
 
-Advisory operating ranges for the 82 AiM telemetry channels in `data/raw/N.csv`.
+Advisory operating ranges for the 82 AiM telemetry channels in `data/raw/2023/N.csv`.
 These are not strict experimental limits; validation is advisory only.
 Empty range cells denote unknown or switch-like channels.
 

@@ -12,12 +12,15 @@
 
 ## What it is
 
-Telemetry from a Formula SAE car, captured on one evening at UTA Autocross on
-Oct 7 2023. All 18 sessions come from that single event, so "season" throughout
-this repo means that one night of running.
+Telemetry from two Formula SAE cars, one directory per season under `data/raw/`:
 
-The pipeline ingests the raw AiM CSV exports, lands them in TimescaleDB, and
-serves SQL views to Power BI. The dashboard above is the payoff.
+- **2023** — combustion car, AiM logger, 18 sessions from one evening at UTA
+  Autocross on Oct 7 2023.
+- **2026** — electric car, CAN logger, 26 files from the Jul 18 drive day, nested
+  by event and driver. Disjoint channel set from 2023; no channel names overlap.
+
+The pipeline ingests the raw CSV exports, lands them in TimescaleDB, and serves
+SQL views to Power BI. The dashboard above is the payoff.
 
 ## Highlights
 
@@ -30,7 +33,7 @@ serves SQL views to Power BI. The dashboard above is the payoff.
 ## Architecture
 
 ```
-data/raw/*.csv
+data/raw/<season>/**/*.csv
     │
     ▼
 clean → validate → parse          parser/
@@ -65,8 +68,9 @@ Defaults live in `config.py` and are overridable via `PGHOST`, `PGPORT`,
 
 ```
 config.py         centralized paths, API host/port, and DB connection defaults
-data/raw/         AiM CSV exports (one file per session)
-data/processed/   files move here after a successful load
+data/raw/2023/    AiM CSV exports from the 2023 combustion car (one file per session)
+data/raw/2026/    CAN logger exports from the 2026 EV, nested <event>/<driver>/
+data/processed/   files move here after a successful load, mirroring the raw layout
 parser/           CSV cleaner, AiM parser, sensor spec loader, advisory validator
 db/               psycopg connection, schema (.sql per table), repository, views/
 loader/           ingestion pipeline (per-file error isolation)

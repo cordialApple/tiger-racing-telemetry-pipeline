@@ -25,7 +25,7 @@ class Pipeline:
     def run(self) -> list[FileResult]:
         with self.db.connection() as conn:
             self.repo.upsert_sensors(conn, self.specs)
-        return [self.process(p) for p in sorted(self.source_dir.glob("*.csv"))]
+        return [self.process(p) for p in sorted(self.source_dir.rglob("*.csv"))]
 
     def process(self, path: Path) -> FileResult:
         try:
@@ -49,5 +49,6 @@ class Pipeline:
         return FileResult(parsed.session.source_file, "loaded", written, report.out_of_range)
 
     def _archive(self, path: Path):
-        self.processed_dir.mkdir(parents=True, exist_ok=True)
-        shutil.move(str(path), str(self.processed_dir / path.name))
+        target = self.processed_dir / path.relative_to(self.source_dir)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(path), str(target))

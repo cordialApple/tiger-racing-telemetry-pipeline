@@ -88,6 +88,20 @@ def test_skips_when_already_loaded(tmp_path):
     assert repo.logged == []
 
 
+def test_discovers_nested_files_and_mirrors_layout(tmp_path):
+    repo = FakeRepo(loaded=False)
+    pipe = make_pipeline(tmp_path, repo, FakeParser())
+    nested = pipe.source_dir / "2026" / "Drive Day 7_18" / "Tristan Drive"
+    nested.mkdir(parents=True)
+    (nested / "20.02.21.csv").write_text("x")
+
+    result = pipe.run()[0]
+
+    assert result.status == "loaded"
+    assert not (nested / "20.02.21.csv").exists()
+    assert (pipe.processed_dir / "2026" / "Drive Day 7_18" / "Tristan Drive" / "20.02.21.csv").exists()
+
+
 def test_error_isolation_continues(tmp_path):
     repo = FakeRepo(loaded=False)
     pipe = make_pipeline(tmp_path, repo, FakeParser(fail_on={"1.csv"}))

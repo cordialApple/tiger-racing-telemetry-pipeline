@@ -5,13 +5,13 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-import config
 from api import app
 from db.connection import Database
 from db.repository import ReadingRepository
 from db.schema_manager import SchemaManager
 from parser.aim_parser import AimParser
 from parser.specs import SpecLoader
+from tests.conftest import SESSION_1
 
 GOLDEN = json.loads((Path(__file__).parent / "golden" / "session_1.json").read_text())
 
@@ -58,7 +58,7 @@ def loaded_db():
     sm = SchemaManager(db)
     sm.apply()
     repo = ReadingRepository()
-    parsed = AimParser().parse(config.RAW_DIR / "1.csv")
+    parsed = AimParser().parse(SESSION_1)
     with db.connection() as conn:
         _purge(conn)
         repo.upsert_sensors(conn, SpecLoader().load())

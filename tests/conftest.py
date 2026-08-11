@@ -3,7 +3,7 @@ import pytest
 import config
 from parser.aim_parser import AimParser
 
-SESSION_1 = config.RAW_DIR / "1.csv"
+SESSION_1 = config.RAW_DIR / "2023" / "1.csv"
 
 
 @pytest.fixture(scope="session")
