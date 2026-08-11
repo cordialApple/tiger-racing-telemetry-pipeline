@@ -1,4 +1,4 @@
-/// Sensor master dimension : one row per distinct channel name across the season, derived from Channels.
+/// Sensor master dimension, one row per distinct channel name across both cars, derived from Channels.
 table Sensors
 	lineageTag: f0d9ba9a-5c3d-4278-8089-59ea26a9d7e0
 

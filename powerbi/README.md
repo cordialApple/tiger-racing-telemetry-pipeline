@@ -1,10 +1,26 @@
 # Power BI Telemetry Report
 
-Power BI project (`.pbip`, PBIR format) over the 2023 season telemetry served by
-this repo's REST API. Open `tiger-telemetry.pbip` in Power BI Desktop.
+Power BI project (`.pbip`, PBIR format) over the telemetry served by this repo's
+REST API, covering both cars. Open `tiger-telemetry.pbip` in Power BI Desktop.
+
+Seven pages: four for the 2023 combustion car (Season Overview, Session
+Deep-Dive, Engine Health, Findings) and three for the 2026 electric car (EV Drive
+Day, EV Thermal, EV Findings).
+
+The 2026 pages carry no page-level filter, by design. 2026 channel names are
+disjoint from 2023, so every sensor-scoped measure is already car-scoped and
+Power BI drops the session categories that come back blank. The two measures that
+are not sensor-scoped, `EV Sessions` and `EV Track Time (min)`, filter on
+`Sessions[platform]` in DAX instead.
+
+**The `.pbix` is a build output, not a source.** The `.pbip` plus the `.Report`
+and `.SemanticModel` folders are the source of truth and the only part that
+diffs. To produce a `.pbix`, open the `.pbip` in Power BI Desktop and use
+File > Save As. `2023-Telemetry-Pipeline-V1.pbix` is an older binary kept for
+reference.
 
 Everything here is plain JSON/TMDL, so the report and semantic model diff like
-code. The machine-local data cache (`.pbi/cache.abf`) is gitignored — on first
+code. The machine-local data cache (`.pbi/cache.abf`) is gitignored, so on first
 open the visuals are empty until you refresh, and refresh needs the pipeline
 running:
 

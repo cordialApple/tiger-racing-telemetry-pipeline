@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "a0000000000000000211",
+  "position": {
+    "x": 16,
+    "y": 428,
+    "z": 600,
+    "width": 620,
+    "height": 276
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sessions"
+                    }
+                  },
+                  "Property": "Session Label"
+                }
+              },
+              "queryRef": "Sessions.Session Label",
+              "nativeQueryRef": "Session Label",
+              "active": true
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Max Motor RPM"
+                }
+              },
+              "queryRef": "Readings.Max Motor RPM",
+              "nativeQueryRef": "Max Motor RPM"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Max Motor Temp C"
+                }
+              },
+              "queryRef": "Readings.Max Motor Temp C",
+              "nativeQueryRef": "Max Motor Temp C"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Max Motor RPM vs Max Motor Temp'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

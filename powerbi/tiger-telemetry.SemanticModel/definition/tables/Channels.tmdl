@@ -13,11 +13,22 @@ table Channels
 		displayFolder: Health
 		lineageTag: 67cc9f08-de54-48e9-97e2-34152af2f75f
 
-	/// Share of channels carrying signal : sensor wiring health.
+	/// Share of channels carrying signal, i.e. sensor wiring health.
 	measure 'Channel Health %' = DIVIDE([Live Channels], [Channel Count])
 		formatString: 0.0%
 		displayFolder: Health
 		lineageTag: 9206cf4d-92f0-4c23-b611-8bac3720c40d
+
+	measure 'EV Channel Health %' = CALCULATE([Channel Health %], Channels[platform] = "ev-2026")
+		formatString: 0.0%
+		displayFolder: EV Health
+		lineageTag: 0000012c-e026-4000-8000-00000000012c
+
+	/// Channels wired but flat for the whole drive day.
+	measure 'EV Dead Channels' = CALCULATE(COUNTROWS(Channels), Channels[has_signal] = FALSE(), Channels[platform] = "ev-2026")
+		formatString: #,0
+		displayFolder: EV Health
+		lineageTag: 0000012d-e026-4000-8000-00000000012d
 
 	column channel_key
 		dataType: string

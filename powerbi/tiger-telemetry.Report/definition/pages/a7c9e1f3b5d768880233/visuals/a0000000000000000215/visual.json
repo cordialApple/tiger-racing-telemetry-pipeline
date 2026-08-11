@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a0000000000000000215",
+  "position": {
+    "x": 520,
+    "y": 16,
+    "z": 100,
+    "width": 246,
+    "height": 110
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Secs Motor Above 55C"
+                }
+              },
+              "queryRef": "Readings.Secs Motor Above 55C",
+              "nativeQueryRef": "Secs Motor Above 55C"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

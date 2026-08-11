@@ -25,6 +25,16 @@ table Sessions
 		displayFolder: Season
 		lineageTag: 952d09d0-e79e-4b76-8c10-e7a824c0a977
 
+	measure 'EV Sessions' = CALCULATE(COUNTROWS(Sessions), Sessions[platform] = "ev-2026")
+		formatString: #,0
+		displayFolder: EV Season
+		lineageTag: 000000c8-e026-4000-8000-0000000000c8
+
+	measure 'EV Track Time (min)' = CALCULATE(DIVIDE(SUM(Sessions[duration_s]), 60), Sessions[platform] = "ev-2026")
+		formatString: #,0.0
+		displayFolder: EV Season
+		lineageTag: 000000c9-e026-4000-8000-0000000000c9
+
 	column session_id
 		dataType: string
 		lineageTag: 31ffc40d-e6e7-4ae6-b9d7-484da51b443b

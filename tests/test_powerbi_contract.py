@@ -1,3 +1,4 @@
+import json
 import re
 
 import pytest
@@ -5,9 +6,10 @@ import pytest
 import config
 from api.models import Channel, Reading, SensorStat, SessionCatalog
 
-TABLES_DIR = (
-    config.ROOT / "powerbi" / "tiger-telemetry.SemanticModel" / "definition" / "tables"
-)
+MODEL_DIR = config.ROOT / "powerbi" / "tiger-telemetry.SemanticModel" / "definition"
+TABLES_DIR = MODEL_DIR / "tables"
+PAGES_DIR = config.ROOT / "powerbi" / "tiger-telemetry.Report" / "definition" / "pages"
+_GUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 _FROM_RECORDS = re.compile(r"\{(?P<columns>[^{}]*)\},\s*MissingField\.UseNull")
 _QUOTED = re.compile(r'"([^"]+)"')
 
@@ -59,6 +61,74 @@ def test_no_session_ids_are_hardcoded(table):
     assert 'session_id = "' not in text
     assert "sessions/1/sensors" not in text
     assert partition_count(table) == 1
+
+
+def model_members() -> set[tuple[str, str]]:
+    members = set()
+    for path in TABLES_DIR.glob("*.tmdl"):
+        table = path.stem
+        text = path.read_text(encoding="utf-8")
+        for name in re.findall(r"^\tmeasure '([^']+)'", text, re.MULTILINE):
+            members.add((table, name))
+        for name in re.findall(r"^\tmeasure ([A-Za-z_]\w*) =", text, re.MULTILINE):
+            members.add((table, name))
+        for name in re.findall(r"^\tcolumn '([^']+)'", text, re.MULTILINE):
+            members.add((table, name))
+        for name in re.findall(r"^\tcolumn ([A-Za-z_]\w*)", text, re.MULTILINE):
+            members.add((table, name))
+    return members
+
+
+def visual_files():
+    return sorted(PAGES_DIR.glob("*/visuals/*/visual.json"))
+
+
+def field_references(node, found):
+    if isinstance(node, dict):
+        for kind in ("Measure", "Column"):
+            body = node.get(kind)
+            if isinstance(body, dict) and "Property" in body:
+                entity = body.get("Expression", {}).get("SourceRef", {}).get("Entity")
+                if entity:
+                    found.add((entity, body["Property"]))
+        for value in node.values():
+            field_references(value, found)
+    elif isinstance(node, list):
+        for value in node:
+            field_references(value, found)
+    return found
+
+
+def test_every_visual_reference_resolves_in_the_model():
+    known = model_members()
+    unresolved = {}
+    for path in visual_files():
+        page = path.parents[2].name
+        refs = field_references(json.loads(path.read_text(encoding="utf-8")), set())
+        missing = sorted(refs - known)
+        if missing:
+            unresolved.setdefault(page, []).extend(missing)
+    assert not unresolved, f"visuals reference members the model does not define: {unresolved}"
+
+
+def test_page_order_matches_the_pages_on_disk():
+    order = json.loads((PAGES_DIR / "pages.json").read_text(encoding="utf-8"))["pageOrder"]
+    on_disk = {p.parent.name for p in PAGES_DIR.glob("*/page.json")}
+    assert set(order) == on_disk
+    assert len(order) == len(set(order))
+
+
+def test_lineage_tags_are_unique_guids():
+    tags = []
+    for path in TABLES_DIR.glob("*.tmdl"):
+        tags += re.findall(r"lineageTag: (\S+)", path.read_text(encoding="utf-8"))
+    assert [t for t in tags if not _GUID.match(t)] == []
+    assert len(tags) == len(set(tags))
+
+
+def test_visual_names_are_unique_across_the_report():
+    names = [json.loads(p.read_text(encoding="utf-8"))["name"] for p in visual_files()]
+    assert len(names) == len(set(names))
 
 
 def test_session_sort_key_does_not_assume_numeric_ids():

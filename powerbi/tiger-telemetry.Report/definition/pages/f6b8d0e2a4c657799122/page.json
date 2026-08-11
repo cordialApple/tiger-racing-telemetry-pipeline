@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "f6b8d0e2a4c657799122",
+  "displayName": "EV Thermal",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}
