@@ -23,7 +23,10 @@ class SensorValidator:
             if spec is None:
                 report.unknown_sensors.add(name)
                 continue
-            if spec.min_range is not None and spec.max_range is not None:
-                if value < spec.min_range or value > spec.max_range:
-                    report.out_of_range += 1
+            if (
+                spec.min_range is not None
+                and spec.max_range is not None
+                and not spec.min_range <= value <= spec.max_range
+            ):
+                report.out_of_range += 1
         return report

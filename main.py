@@ -37,7 +37,10 @@ def ingest(db):
     if any(r.status == "loaded" for r in results):
         sm.refresh_views()
     for r in results:
-        detail = r.error if r.status == "error" else f"{r.readings} readings, {r.out_of_range} out of range"
+        detail = (
+            r.error if r.status == "error"
+            else f"{r.readings} readings, {r.out_of_range} out of range"
+        )
         print(f"{r.source_file}: {r.status} ({detail})")
 
 
@@ -91,7 +94,8 @@ def main():
     parser = argparse.ArgumentParser(description="FSAE telemetry pipeline")
     parser.add_argument("command", nargs="?", default="all",
                         choices=["profile", "check", "ingest", "serve", "all"])
-    parser.add_argument("path", nargs="?", help="drop directory (default: every one under data/raw)")
+    parser.add_argument("path", nargs="?",
+                        help="drop directory (default: every one under data/raw)")
     args = parser.parse_args()
     if args.command == "profile":
         profile(args.path)

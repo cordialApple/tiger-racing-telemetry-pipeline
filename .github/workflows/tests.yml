@@ -2,16 +2,52 @@ name: tests
 
 on:
   push:
-    branches: [feat/pipeline, main]
+    branches: [main, master]
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  test:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: ruff check .
+
+  fast:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Tests that need no database
+        run: python -m pytest -q -m "not db"
+      - name: Data checks
+        run: python main.py check
+
+  db:
     runs-on: ubuntu-latest
 
     services:
       timescaledb:
-        image: timescale/timescaledb:latest-pg16
+        image: timescale/timescaledb:2.27.1-pg16
         env:
           POSTGRES_USER: fsae
           POSTGRES_PASSWORD: fsae2023
@@ -33,12 +69,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: pip
-
       - run: pip install -r requirements.txt
 
-      - run: python -m pytest -q
+      - name: Verify TimescaleDB is reachable
+        run: |
+          python - <<'PY'
+          from db.connection import Database
+          with Database().connection() as conn:
+              row = conn.execute(
+                  "SELECT 1 FROM pg_available_extensions WHERE name = 'timescaledb'"
+              ).fetchone()
+          assert row, "timescaledb extension unavailable, db tests would silently skip"
+          PY
+
+      - name: Full suite against TimescaleDB
+        run: python -m pytest -q

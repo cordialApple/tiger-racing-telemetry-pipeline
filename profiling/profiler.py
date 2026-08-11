@@ -1,5 +1,6 @@
 import hashlib
 from collections import defaultdict
+from itertools import pairwise
 from pathlib import Path
 
 from parser.registry import default_registry
@@ -96,7 +97,7 @@ class Profiler:
         key = schema_id(names)
         schemas.setdefault(key, names)
         stamps = sorted({ts for ts, _name, _value in parsed.readings})
-        deltas = {round((b - a).total_seconds(), 6) for a, b in zip(stamps, stamps[1:])}
+        deltas = {round((b - a).total_seconds(), 6) for a, b in pairwise(stamps)}
         return FileProfile(
             rel_path=rel,
             platform=parsed.session.platform,

@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from loader.pipeline import Pipeline
 from parser.models import ParsedSession, SessionMeta
@@ -53,7 +53,7 @@ class FakeParser:
         meta = SessionMeta(
             session_id=path.stem, source_file=path.name, vehicle=None, racer=None,
             championship=None, session_name=None, comment=None,
-            started_at=datetime(2023, 10, 7, tzinfo=timezone.utc),
+            started_at=datetime(2023, 10, 7, tzinfo=UTC),
             sample_rate_hz=20, duration_s=1, segment_times=None,
             platform="fake", event=None,
         )

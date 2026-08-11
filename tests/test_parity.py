@@ -6,7 +6,6 @@ import pytest
 from fastapi.testclient import TestClient
 
 from api import app
-from db.connection import Database
 from db.repository import ReadingRepository
 from db.schema_manager import SchemaManager
 from parser.aim_parser import AimParser
@@ -43,33 +42,21 @@ def test_rpm_series_matches_reference(parsed):
 
 
 @pytest.fixture(scope="module")
-def loaded_db():
-    db = Database()
-    try:
-        with db.connection() as conn:
-            available = conn.execute(
-                "SELECT 1 FROM pg_available_extensions WHERE name = 'timescaledb'"
-            ).fetchone()
-    except Exception as e:
-        pytest.skip(f"no database available: {e}")
-    if available is None:
-        pytest.skip("timescaledb extension not available")
-
-    sm = SchemaManager(db)
+def loaded_db(database):
+    sm = SchemaManager(database)
     sm.apply()
     repo = ReadingRepository()
     parsed = AimParser().parse(SESSION_1)
-    with db.connection() as conn:
+    with database.connection() as conn:
         _purge(conn)
         repo.upsert_sensors(conn, SpecLoader().load())
         repo.insert_session(conn, parsed.session)
         n = repo.copy_readings(conn, parsed.session.session_id, parsed.readings)
-        repo.log_ingestion(conn, parsed.packet_id, "1", "1.csv", parsed.row_count, n)
+        repo.log_ingestion(conn, parsed.packet_id, "1", "2023/1.csv", parsed.row_count, n)
     sm.refresh_views()
-    yield db
-    with db.connection() as conn:
+    yield database
+    with database.connection() as conn:
         _purge(conn)
-    db.close()
 
 
 def _purge(conn):

@@ -3,10 +3,13 @@ from typing import Any, Literal
 from fastapi import FastAPI, HTTPException, Query
 from psycopg.rows import dict_row
 
-from db.connection import Database
 from api.models import (
-    Channel, ReadingPage, SensorStat, SessionCatalog,
+    Channel,
+    ReadingPage,
+    SensorStat,
+    SessionCatalog,
 )
+from db.connection import Database
 
 app = FastAPI(title="Tiger Racing Telemetry API")
 db = Database()
@@ -21,9 +24,8 @@ _MAX_LIMIT = 500000
 
 
 def run_query(sql: str, params: list[Any] | tuple[Any, ...] = ()) -> list[dict]:
-    with db.connection() as conn:
-        with conn.cursor(row_factory=dict_row) as cur:
-            return cur.execute(sql, params).fetchall()
+    with db.connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+        return cur.execute(sql, params).fetchall()
 
 
 def scalar(sql: str, params: list[Any] | tuple[Any, ...] = ()) -> Any:
@@ -49,8 +51,8 @@ def _filters(sensor, start, end) -> tuple[str, list]:
 def health():
     try:
         run_query("SELECT 1")
-    except Exception:
-        raise HTTPException(status_code=503, detail="database unavailable")
+    except Exception as error:
+        raise HTTPException(status_code=503, detail="database unavailable") from error
     return {"status": "ok"}
 
 

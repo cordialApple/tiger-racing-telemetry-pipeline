@@ -164,16 +164,24 @@ still match the Pydantic response models.
 ## Testing & CI
 
 ```
-pytest
+pytest                  # everything
+pytest -m "not db"      # parsers, profiler, checks, Power BI contract
+pytest -m db            # repository, hypertable, continuous aggregate
+ruff check .
 ```
 
-Unit and parser-parity tests run without a database. The repository and
-DB-backed parity tests run against a live TimescaleDB and skip when one is not
-available.
+Tests that need a database are marked `db` automatically: `conftest.py` tags any
+test reaching for the `database` or `loaded_db` fixture, so the marker cannot
+drift from reality. They skip when no TimescaleDB is reachable.
 
-CI (`.github/workflows/tests.yml`) runs the full suite on push and PR against a
-`timescale/timescaledb` service container, so the DB-backed tests (hypertable
-and continuous-aggregate DDL included) actually execute there.
+CI (`.github/workflows/tests.yml`) runs three jobs:
+
+- `lint`: `ruff check`.
+- `fast`: no service container on Python 3.11 and 3.13, so the profiler and
+  checks are proven database-free. Also runs `python main.py check`, which exits
+  non-zero on any error-severity finding.
+- `db`: full suite against a pinned `timescale/timescaledb:2.27.1-pg16` service
+  container, with a pre-flight assert so the DB tests can never skip silently.
 
 ## License
 

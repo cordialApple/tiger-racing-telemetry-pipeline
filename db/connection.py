@@ -22,8 +22,8 @@ class TimescaleConfig:
 
 
 class Database:
-    def __init__(self, cfg: TimescaleConfig = TimescaleConfig()):
-        self.cfg = cfg
+    def __init__(self, cfg: TimescaleConfig | None = None):
+        self.cfg = cfg or TimescaleConfig()
         self._pool: ConnectionPool | None = None
 
     @property

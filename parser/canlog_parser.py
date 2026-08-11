@@ -3,6 +3,7 @@ import hashlib
 import re
 import statistics
 from datetime import date, datetime, timedelta
+from itertools import pairwise
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -109,14 +110,14 @@ class CanLogParser:
 
     @staticmethod
     def _sample_rate(stamps: list[datetime]) -> int:
-        deltas = [(b - a).total_seconds() for a, b in zip(stamps, stamps[1:])]
+        deltas = [(b - a).total_seconds() for a, b in pairwise(stamps)]
         return round(1 / statistics.median(deltas))
 
     @staticmethod
     def _readings(data, names, stamps) -> list[tuple[datetime, str, float]]:
         rows = []
-        for ts, row in zip(stamps, data):
-            for name, value in zip(names, row[1:]):
+        for ts, row in zip(stamps, data, strict=True):
+            for name, value in zip(names, row[1:], strict=False):
                 if value:
                     rows.append((ts, name, float(value)))
         return rows

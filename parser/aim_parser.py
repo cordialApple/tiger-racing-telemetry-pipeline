@@ -27,7 +27,7 @@ class AimParser:
         meta = self._read_meta(lines)
         header_idx = self._find_header(lines)
         sensors = self._row(lines[header_idx])[1:]
-        units = dict(zip(sensors, self._row(lines[header_idx + 1])[1:]))
+        units = dict(zip(sensors, self._row(lines[header_idx + 1])[1:], strict=False))
 
         session = self._build_session(path, meta)
         data_lines = [line for line in lines[header_idx + 2:] if line.strip()]
@@ -80,7 +80,7 @@ class AimParser:
         rows = []
         for index, line in enumerate(data_lines):
             ts = started_at + index * period
-            for name, value in zip(sensors, self._row(strip_leading_comma(line))):
+            for name, value in zip(sensors, self._row(strip_leading_comma(line)), strict=False):
                 if value:
                     rows.append((ts, name, float(value)))
         return rows

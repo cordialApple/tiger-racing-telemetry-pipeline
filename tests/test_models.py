@@ -1,4 +1,4 @@
-from api.models import Reading, ReadingPage, Channel, SessionCatalog, SensorStat
+from api.models import Channel, Reading, ReadingPage
 
 
 def test_reading_fields():

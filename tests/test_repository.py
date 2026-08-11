@@ -1,8 +1,5 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
-import pytest
-
-from db.connection import Database
 from db.repository import ReadingRepository
 from db.schema_manager import SchemaManager
 from parser.models import SensorSpec, SessionMeta
@@ -10,23 +7,7 @@ from parser.models import SensorSpec, SessionMeta
 SESSION_ID = "test_session_repo"
 PACKET_ID = "test_packet_repo"
 SOURCE_FILE = "test_repo_fixture.csv"
-STARTED = datetime(2023, 6, 1, 12, 0, 0, tzinfo=timezone.utc)
-
-
-@pytest.fixture(scope="module")
-def database():
-    db = Database()
-    try:
-        with db.connection() as conn:
-            available = conn.execute(
-                "SELECT 1 FROM pg_available_extensions WHERE name = 'timescaledb'"
-            ).fetchone()
-    except Exception as e:
-        pytest.skip(f"no database available: {e}")
-    if available is None:
-        pytest.skip("timescaledb extension not available")
-    yield db
-    db.close()
+STARTED = datetime(2023, 6, 1, 12, 0, 0, tzinfo=UTC)
 
 
 def _cleanup(conn):
