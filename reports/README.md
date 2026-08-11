@@ -134,10 +134,31 @@ integral. Total 1.362 kWh over 701 s of motor-turning, which scales to
 **116 Wh per 59.6 s endurance lap**. Real FSAE Electric 2026 Michigan teams ran
 129 to 266 Wh/lap, with 308 Wh/lap the cutoff for zero efficiency points
 (**D.13.4.5**). That looks efficient, but at 4.1 kW mean it mostly reflects
-gentle driving rather than an efficient car. Note that `DC Current` never goes
-negative (clamped at 0) while `Pack_Current` reaches -16.9 A, so regen exists
-and the DC channel cannot measure it. FSAE **D.13.4.2** credits recovered energy
-in full, so that is a scoring channel worth fixing.
+gentle driving rather than an efficient car.
+
+**Regen is capped by the accumulator, not by the driver.** `Pack_DCL` (discharge
+limit) sits at 181 to 190 A while `Pack_CCL` (charge limit) sits at 11 to 13 A, a
+**15.8 to 1 asymmetry**, which is the normal lithium behaviour of accepting
+charge far more slowly than it delivers. At the median 320 V bus, a 13 A charge
+limit is **4.2 kW, about 11% of the 37.8 kW peak drive power**. And the BMS
+tightens it as the pack warms: `Pack_CCL` against pack temperature is
+**rho = -0.695, p < 1e-300**, falling from a mean of 12.8 A below 33 C to 11.7 A
+above 39 C. So chasing regen for efficiency points (**D.13.4.2**, full credit at
+FSAE; FSG **D 7.9.5** taxes it 10%) is a pack and BMS conversation, not a
+tuning one.
+
+Two related measurement problems. `DC Current` never goes negative (clamped at
+0), so the inverter's own DC channel cannot see regen at all. And
+`Pack_Current` reaches **-16.9 A against a 13 A charge limit**, a 30%
+overshoot: worth checking, because a cell pushed past its datasheet maximum for
+more than 500 ms obliges the AMS to open the shutdown circuit under FSAE
+**EV.7.3.5**.
+
+**One thing to confirm rather than a finding.** The 12 V rail runs 13.24 to
+14.82 V and exceeds 14.6 V on 11.2% of samples. That is unremarkable for
+lead-acid (Odyssey's hard ceiling is 15.0 V, never reached) but above the cell
+maximum for LiFePO4. Identify the low-voltage battery chemistry before deciding
+whether this matters.
 
 ### EV Thermal
 
