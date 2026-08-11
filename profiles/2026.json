@@ -1,5 +1,5 @@
 {
-  "root": "C:/Users/randl/Documents/GitHub/tiger-racing-telemetry-pipeline/data/raw/2026",
+  "root": "data/raw/2026",
   "file_count": 26,
   "unique_content_count": 21,
   "files": [

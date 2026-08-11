@@ -1,0 +1,6 @@
+# Telemetry exports are content-hashed for ingest idempotency and golden profiles,
+# so git must never rewrite their line endings.
+*.csv -text
+
+*.pbix binary
+*.png binary

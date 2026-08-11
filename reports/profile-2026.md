@@ -1,4 +1,4 @@
-# Dataset profile: `C:/Users/randl/Documents/GitHub/tiger-racing-telemetry-pipeline/data/raw/2026`
+# Dataset profile: `data/raw/2026`
 
 - files: 26 (21 unique by content)
 - schemas: 2

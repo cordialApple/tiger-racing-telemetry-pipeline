@@ -3,6 +3,7 @@ from collections import defaultdict
 from itertools import pairwise
 from pathlib import Path
 
+import config
 from parser.registry import default_registry
 from profiling.models import ChannelProfile, DatasetProfile, FileProfile
 
@@ -77,7 +78,7 @@ class Profiler:
             self._accumulate(parsed, channels)
 
         return DatasetProfile(
-            root=root.as_posix(),
+            root=self._label(root),
             file_count=len(files) + len(unreadable),
             unique_content_count=len(by_content),
             files=tuple(files),
@@ -90,6 +91,14 @@ class Profiler:
             ),
             unreadable=tuple(unreadable),
         )
+
+    @staticmethod
+    def _label(root: Path) -> str:
+        # goldens are committed, so the recorded root must not carry a machine-specific prefix
+        try:
+            return root.resolve().relative_to(config.ROOT).as_posix()
+        except ValueError:
+            return root.name
 
     @staticmethod
     def _file_profile(rel, parsed, schemas) -> FileProfile:
