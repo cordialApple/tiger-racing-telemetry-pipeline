@@ -1,0 +1,1397 @@
+{
+  "root": "C:/Users/randl/Documents/GitHub/tiger-racing-telemetry-pipeline/data/raw/2023",
+  "file_count": 18,
+  "unique_content_count": 18,
+  "files": [
+    {
+      "rel_path": "1.csv",
+      "platform": "ice-2023",
+      "session_id": "1",
+      "content_sha": "e31fe09fca09",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 1800,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T14:29:00-05:00",
+      "last_ts": "2023-10-07T14:30:29.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "10.csv",
+      "platform": "ice-2023",
+      "session_id": "10",
+      "content_sha": "2391ec60e4e5",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 420,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:16:00-05:00",
+      "last_ts": "2023-10-07T15:16:20.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "11.csv",
+      "platform": "ice-2023",
+      "session_id": "11",
+      "content_sha": "a36ac29dfdc8",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 400,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:17:00-05:00",
+      "last_ts": "2023-10-07T15:17:19.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "12.csv",
+      "platform": "ice-2023",
+      "session_id": "12",
+      "content_sha": "10fb1d7513de",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 4840,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:20:00-05:00",
+      "last_ts": "2023-10-07T15:24:01.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "13.csv",
+      "platform": "ice-2023",
+      "session_id": "13",
+      "content_sha": "8f9f03e9b2a5",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 4580,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:24:00-05:00",
+      "last_ts": "2023-10-07T15:27:48.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "14.csv",
+      "platform": "ice-2023",
+      "session_id": "14",
+      "content_sha": "a763214a2552",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 4220,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:28:00-05:00",
+      "last_ts": "2023-10-07T15:31:30.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "15.csv",
+      "platform": "ice-2023",
+      "session_id": "15",
+      "content_sha": "b9b990dbdb56",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 680,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:40:00-05:00",
+      "last_ts": "2023-10-07T15:40:33.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "16.csv",
+      "platform": "ice-2023",
+      "session_id": "16",
+      "content_sha": "c08fe9842bdf",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 440,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:41:00-05:00",
+      "last_ts": "2023-10-07T15:41:21.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "17.csv",
+      "platform": "ice-2023",
+      "session_id": "17",
+      "content_sha": "e42285ae6d7c",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 260,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T14:12:00-05:00",
+      "last_ts": "2023-10-07T14:12:12.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "18.csv",
+      "platform": "ice-2023",
+      "session_id": "18",
+      "content_sha": "dc86f93aa60f",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 9140,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T14:05:00-05:00",
+      "last_ts": "2023-10-07T14:12:36.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "2.csv",
+      "platform": "ice-2023",
+      "session_id": "2",
+      "content_sha": "06d515409148",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 220,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T14:30:00-05:00",
+      "last_ts": "2023-10-07T14:30:10.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "3.csv",
+      "platform": "ice-2023",
+      "session_id": "3",
+      "content_sha": "1405237fcbfd",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 520,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T14:37:00-05:00",
+      "last_ts": "2023-10-07T14:37:25.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "4.csv",
+      "platform": "ice-2023",
+      "session_id": "4",
+      "content_sha": "067653b14890",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 2480,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T14:38:00-05:00",
+      "last_ts": "2023-10-07T14:40:03.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "5.csv",
+      "platform": "ice-2023",
+      "session_id": "5",
+      "content_sha": "0e017b9e1b47",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 200,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T14:40:00-05:00",
+      "last_ts": "2023-10-07T14:40:09.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "6.csv",
+      "platform": "ice-2023",
+      "session_id": "6",
+      "content_sha": "7c6efc554f20",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 2160,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:00:00-05:00",
+      "last_ts": "2023-10-07T15:01:47.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "7.csv",
+      "platform": "ice-2023",
+      "session_id": "7",
+      "content_sha": "eb6353bdd3c4",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 4360,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:02:00-05:00",
+      "last_ts": "2023-10-07T15:05:37.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "8.csv",
+      "platform": "ice-2023",
+      "session_id": "8",
+      "content_sha": "7461efab496c",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 3520,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:13:00-05:00",
+      "last_ts": "2023-10-07T15:15:55.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "9.csv",
+      "platform": "ice-2023",
+      "session_id": "9",
+      "content_sha": "3765399bc6a1",
+      "schema_id": "79be3c1abc9a",
+      "row_count": 220,
+      "channel_count": 82,
+      "first_ts": "2023-10-07T15:16:00-05:00",
+      "last_ts": "2023-10-07T15:16:10.950000-05:00",
+      "sample_hz": 20,
+      "spacing_uniform": true
+    }
+  ],
+  "schemas": {
+    "79be3c1abc9a": [
+      "Logger Temperature",
+      "External Voltage",
+      "Oil Pressure",
+      "Oil Temp",
+      "Rear Brake",
+      "InlineAcc",
+      "LateralAcc",
+      "VerticalAcc",
+      "RollRate",
+      "PitchRate",
+      "YawRate",
+      "PreCalcGear",
+      "ECU RPM",
+      "ECU Gear 2",
+      "ECU VehSpeed",
+      "ECU Gear",
+      "ECU WheelSpdFL",
+      "ECU WheelSpdFR",
+      "ECU WheelSpdRL",
+      "ECU WheelSpdRR",
+      "ECU EngLimitAct",
+      "ECU GenericSen2",
+      "ECU GenericSen7",
+      "ECU CoolantTemp",
+      "ECU FuelTrimSTB1",
+      "ECU FuelTrimSTB2",
+      "ECU TorqCIgnCorr dup 1",
+      "ECU GenericSen8",
+      "ECU BatteryVolt",
+      "ECU GenericSen9",
+      "ECU GenericSen10",
+      "ECU ThrottlePos",
+      "ECU InjDT1",
+      "ECU GenericSen3",
+      "ECU GenericSen1",
+      "ECU InjDT2",
+      "ECU GenOut1DT",
+      "ECU AirTemp",
+      "ECU FuelTrimLTB1",
+      "ECU GearSwitch",
+      "ECU DecelCutActi",
+      "ECU TPSAct",
+      "ECU BrakePedSw",
+      "ECU GenericSen4",
+      "ECU GenericSen5",
+      "ECU FuelTrimLTB2",
+      "ECU Lambda1",
+      "ECU WheelSlip",
+      "ECU WheelDiff",
+      "ECU ClutchSw",
+      "ECU FlatShSw",
+      "ECU AuxRPMLimSw",
+      "ECU BatteryLtSw",
+      "ECU GenericSen6",
+      "ECU KnockLev1",
+      "ECU KnockLev2",
+      "ECU TargLambda",
+      "Av3E9 7",
+      "ECU InjectionDT3 dup 1",
+      "ECU InjectionDT4 dup 1",
+      "ECU IgnitionAng1 dup 1",
+      "ECU IgnitionAng2 dup 1",
+      "ECU TrigCount",
+      "ECU CheckEngLtSw",
+      "ECU Laun Ctr Sw",
+      "ECU TrigSyncLev",
+      "ECU TorqDrvsRPMT",
+      "ECU TorqDrvsRPME",
+      "ECU Inj Pres D",
+      "ECU TorDrRPMEI",
+      "ECU TorDrRPMIC",
+      "ECU IgnitionAng1 dup 2",
+      "ECU TorqCIgnCorr dup 2",
+      "ECU IgnitionAng2 dup 2",
+      "ECU InjectionDT3 dup 2",
+      "ECU InjectionDT4 dup 2",
+      "ECU Acc Ped Pos",
+      "ECU RaceTimer",
+      "ECU Cru Last T S",
+      "ECU Cruise Trg S",
+      "ECU Crui Spd Err",
+      "ECU Cruise Ctr S"
+    ]
+  },
+  "channels": [
+    {
+      "name": "Av3E9 7",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU Acc Ped Pos",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 1.0,
+      "max": 100.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU AirTemp",
+      "unit": "C",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 20.75,
+      "max": 28.15,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU AuxRPMLimSw",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU BatteryLtSw",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU BatteryVolt",
+      "unit": "V",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 5.9288,
+      "max": 13.6944,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU BrakePedSw",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU CheckEngLtSw",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU ClutchSw",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU CoolantTemp",
+      "unit": "C",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 59.9672,
+      "max": 110.7432,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU Cru Last T S",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU Crui Spd Err",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU Cruise Ctr S",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU Cruise Trg S",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU DecelCutActi",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU EngLimitAct",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 2.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU FlatShSw",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU FuelTrimLTB1",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU FuelTrimLTB2",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU FuelTrimSTB1",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU FuelTrimSTB2",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU Gear",
+      "unit": "gear",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU Gear 2",
+      "unit": "gear",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GearSwitch",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenOut1DT",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenericSen1",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 485.4615,
+      "max": 4972.686,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU GenericSen10",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenericSen2",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 461.5243,
+      "max": 4972.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU GenericSen3",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenericSen4",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenericSen5",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenericSen6",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenericSen7",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenericSen8",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU GenericSen9",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU IgnitionAng1 dup 1",
+      "unit": "deg",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 3.8275,
+      "max": 41.9528,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU IgnitionAng1 dup 2",
+      "unit": "deg",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 3.8275,
+      "max": 41.9528,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU IgnitionAng2 dup 1",
+      "unit": "deg",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 3.8275,
+      "max": 41.9528,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU IgnitionAng2 dup 2",
+      "unit": "deg",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 3.8275,
+      "max": 41.9528,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU Inj Pres D",
+      "unit": "bar",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 2.001,
+      "max": 2.7998,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU InjDT1",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 77.8449,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU InjDT2",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU InjectionDT3 dup 1",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU InjectionDT3 dup 2",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU InjectionDT4 dup 1",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU InjectionDT4 dup 2",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU KnockLev1",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU KnockLev2",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU Lambda1",
+      "unit": "lambda",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.004,
+      "max": 4.6327,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU Laun Ctr Sw",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU RPM",
+      "unit": "rpm",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 14706.2178,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU RaceTimer",
+      "unit": "ms",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU TPSAct",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU TargLambda",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.9,
+      "max": 1.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU ThrottlePos",
+      "unit": "%",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 1.0117,
+      "max": 100.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU TorDrRPMEI",
+      "unit": "deg",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU TorDrRPMIC",
+      "unit": "deg",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU TorqCIgnCorr dup 1",
+      "unit": "deg",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU TorqCIgnCorr dup 2",
+      "unit": "deg",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU TorqDrvsRPME",
+      "unit": "deg/s",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU TorqDrvsRPMT",
+      "unit": "deg/s",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU TrigCount",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 21.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU TrigSyncLev",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 2.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ECU VehSpeed",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU WheelDiff",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU WheelSlip",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU WheelSpdFL",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU WheelSpdFR",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU WheelSpdRL",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ECU WheelSpdRR",
+      "unit": "km/h",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "External Voltage",
+      "unit": "V",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 8.1591,
+      "max": 13.9594,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "InlineAcc",
+      "unit": "g",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": -1.7413,
+      "max": 1.5473,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "LateralAcc",
+      "unit": "g",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": -1.8574,
+      "max": 1.6123,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Logger Temperature",
+      "unit": "C",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 32.9375,
+      "max": 39.1875,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Oil Pressure",
+      "unit": "bar",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0037,
+      "max": 6.2456,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Oil Temp",
+      "unit": "C",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 47.0625,
+      "max": 103.3106,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "PitchRate",
+      "unit": "deg/s",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": -18.8461,
+      "max": 19.0094,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "PreCalcGear",
+      "unit": "#",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Rear Brake",
+      "unit": "bar",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": -1.9659,
+      "max": 72.9145,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "RollRate",
+      "unit": "deg/s",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": -28.1016,
+      "max": 21.2422,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "VerticalAcc",
+      "unit": "g",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": -3.6055,
+      "max": -2.3223,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "YawRate",
+      "unit": "deg/s",
+      "platforms": [
+        "ice-2023"
+      ],
+      "n": 40460,
+      "n_missing": 0,
+      "min": -97.8375,
+      "max": 93.0656,
+      "inferred_type": "float",
+      "is_constant": false
+    }
+  ],
+  "duplicate_groups": [],
+  "unreadable": []
+}

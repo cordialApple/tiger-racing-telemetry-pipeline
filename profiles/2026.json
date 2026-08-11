@@ -1,0 +1,1270 @@
+{
+  "root": "C:/Users/randl/Documents/GitHub/tiger-racing-telemetry-pipeline/data/raw/2026",
+  "file_count": 26,
+  "unique_content_count": 21,
+  "files": [
+    {
+      "rel_path": "Drive Day 7_18/2026-7-18   17.55.26.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_175526",
+      "content_sha": "c5c639ca1fa3",
+      "schema_id": "61ca8aace672",
+      "row_count": 339,
+      "channel_count": 60,
+      "first_ts": "2026-07-18T17:55:26.025000-05:00",
+      "last_ts": "2026-07-18T17:55:59.825000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Emiliano Drive/2026-7-18   21.25.44.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_212544_emiliano",
+      "content_sha": "200a690cbeb5",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 579,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:25:44.025000-05:00",
+      "last_ts": "2026-07-18T21:26:41.825000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Emiliano Drive/2026-7-18   21.27.33.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_212733_emiliano",
+      "content_sha": "5e9e04831922",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 419,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:27:33.025000-05:00",
+      "last_ts": "2026-07-18T21:28:14.825000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Emiliano Drive/2026-7-18   21.28.16.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_212816_emiliano",
+      "content_sha": "07173121b153",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 220,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:28:16.025000-05:00",
+      "last_ts": "2026-07-18T21:28:37.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Emiliano Drive/2026-7-18   21.28.42.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_212842_emiliano",
+      "content_sha": "f26c5b91a912",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 220,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:28:42.025000-05:00",
+      "last_ts": "2026-07-18T21:29:03.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Emiliano Drive/2026-7-18   21.29.23.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_212923_emiliano",
+      "content_sha": "67460352e955",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 380,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:29:23.025000-05:00",
+      "last_ts": "2026-07-18T21:30:00.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Emiliano Drive/2026-7-18   21.30.04.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_213004_emiliano",
+      "content_sha": "1a8433bf1168",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 220,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:30:04.025000-05:00",
+      "last_ts": "2026-07-18T21:30:25.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Emiliano Drive/2026-7-18   21.30.30.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_213030_emiliano",
+      "content_sha": "2f775054c4e7",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 260,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:30:30.025000-05:00",
+      "last_ts": "2026-07-18T21:30:55.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Ryan Drive/2026-7-18   21.50.44.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_215044_ryan",
+      "content_sha": "6939b3836a08",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 658,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:50:44.025000-05:00",
+      "last_ts": "2026-07-18T21:51:49.725000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Ryan Drive/2026-7-18   21.53.09.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_215309_ryan",
+      "content_sha": "1cca7c275163",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 380,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:53:09.025000-05:00",
+      "last_ts": "2026-07-18T21:53:46.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Ryan Drive/2026-7-18   21.56.34(Weird FlowRate).csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_215634_ryan",
+      "content_sha": "f8a2dfe19bc5",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 419,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:56:34.025000-05:00",
+      "last_ts": "2026-07-18T21:57:15.825000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Ryan Drive/2026-7-18   21.59.22.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_215922_ryan",
+      "content_sha": "4c8d0190b666",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 220,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T21:59:22.025000-05:00",
+      "last_ts": "2026-07-18T21:59:43.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Tristan Drive/2026-7-18   20.02.21.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_200221_tristan",
+      "content_sha": "6faa00635374",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 897,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:02:21.025000-05:00",
+      "last_ts": "2026-07-18T20:03:50.625000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Tristan Drive/2026-7-18   20.06.15.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_200615_tristan",
+      "content_sha": "25aa01e1dcba",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 738,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:06:15.025000-05:00",
+      "last_ts": "2026-07-18T20:07:28.725000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Tristan Drive/2026-7-18   20.08.05.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_200805_tristan",
+      "content_sha": "554af5ad576c",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 180,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:08:05.025000-05:00",
+      "last_ts": "2026-07-18T20:08:22.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Tristan Drive/2026-7-18   20.10.00.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_201000_tristan",
+      "content_sha": "629d7d57091b",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 858,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:10:00.025000-05:00",
+      "last_ts": "2026-07-18T20:11:25.725000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Tristan Drive/2026-7-18   20.14.12.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_201412_tristan",
+      "content_sha": "564a12f3d813",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 579,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:14:12.025000-05:00",
+      "last_ts": "2026-07-18T20:15:09.825000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Tristan Drive/2026-7-18   20.48.37.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_204837_tristan",
+      "content_sha": "e57d3de89d6f",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 579,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:48:37.025000-05:00",
+      "last_ts": "2026-07-18T20:49:34.825000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Tristan Drive/2026-7-18   20.50.06.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_205006_tristan",
+      "content_sha": "667a6e15a439",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 2292,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:50:06.025000-05:00",
+      "last_ts": "2026-07-18T20:53:55.125000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Yianni Drive/2026-7-18   18.10.04.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_181004_yianni",
+      "content_sha": "953f71ef131b",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 897,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T18:10:04.025000-05:00",
+      "last_ts": "2026-07-18T18:11:33.625000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Yianni Drive/2026-7-18   18.17.38.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_181738_yianni",
+      "content_sha": "382db1f8ede7",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 579,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T18:17:38.025000-05:00",
+      "last_ts": "2026-07-18T18:18:35.825000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Yianni Drive/2026-7-18   20.02.21.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_200221_yianni",
+      "content_sha": "6faa00635374",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 897,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:02:21.025000-05:00",
+      "last_ts": "2026-07-18T20:03:50.625000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Yianni Drive/2026-7-18   20.06.15.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_200615_yianni",
+      "content_sha": "25aa01e1dcba",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 738,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:06:15.025000-05:00",
+      "last_ts": "2026-07-18T20:07:28.725000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Yianni Drive/2026-7-18   20.08.05.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_200805_yianni",
+      "content_sha": "554af5ad576c",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 180,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:08:05.025000-05:00",
+      "last_ts": "2026-07-18T20:08:22.925000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Yianni Drive/2026-7-18   20.10.00.csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_201000_yianni",
+      "content_sha": "629d7d57091b",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 858,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:10:00.025000-05:00",
+      "last_ts": "2026-07-18T20:11:25.725000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    },
+    {
+      "rel_path": "Drive Day 7_18/Yianni Drive/2026-7-18   20.14.12 (Still Pump Run).csv",
+      "platform": "ev-2026",
+      "session_id": "2026-07-18_201412_yianni",
+      "content_sha": "564a12f3d813",
+      "schema_id": "c04d20aa28c5",
+      "row_count": 579,
+      "channel_count": 54,
+      "first_ts": "2026-07-18T20:14:12.025000-05:00",
+      "last_ts": "2026-07-18T20:15:09.825000-05:00",
+      "sample_hz": 10,
+      "spacing_uniform": true
+    }
+  ],
+  "schemas": {
+    "61ca8aace672": [
+      "Motor RPM",
+      "MC Duty Cycle",
+      "MC Volts",
+      "AC Current",
+      "DC Current",
+      "CellId",
+      "MC Temp",
+      "Motor Temp",
+      "Fault Code",
+      "MC Throttle",
+      "Drive Enable",
+      "RadIn_Temp",
+      "RadOut_Tem",
+      "Flowrate",
+      "Actual_FOC_id",
+      "Actual_FOC_iq",
+      "Actual_Brake",
+      "Rolling_Counter",
+      "Relay_State",
+      "CRC_Checksum",
+      "CRC_Checksum_22",
+      "Pack_Current",
+      "Pack_CCL",
+      "Pack_DCL",
+      "Pack_Open_Volta",
+      "TSB HighTemp",
+      "Pack_SOC",
+      "Cell Low",
+      "Therm1_Val",
+      "Therm1_LowVal",
+      "Therm1_HighVal",
+      "Therm2_Val",
+      "Therm2_LowVal",
+      "Therm2_HighVal",
+      "Therm1_ID",
+      "Therm1_ModNum",
+      "AN3",
+      "AN6",
+      "VBAT",
+      "Int Temp",
+      "CAN1 Load",
+      "CAN1 ERRORS",
+      "CAN2 ERRORS",
+      "ALARMS1",
+      "uFLAGS1",
+      "ACC Long",
+      "ACC Lat",
+      "ACC Vert",
+      "Pitch Rate",
+      "Roll Rate",
+      "Yaw Rate",
+      "RTD",
+      "Energized",
+      "LV Low",
+      "Motor Temp High",
+      "MC Temp High",
+      "Logging",
+      "TSB Temp",
+      "Stop Logging",
+      "WATER T ALM"
+    ],
+    "c04d20aa28c5": [
+      "Motor RPM",
+      "MC Duty Cycle",
+      "MC Volts",
+      "AC Current",
+      "DC Current",
+      "CellId",
+      "MC Temp",
+      "Motor Temp",
+      "Fault Code",
+      "MC Throttle",
+      "Drive Enable",
+      "RadIn_Temp",
+      "RadOut_Tem",
+      "Flowrate",
+      "Actual_FOC_id",
+      "Actual_FOC_iq",
+      "Actual_Brake",
+      "Rolling_Counter",
+      "Relay_State",
+      "CRC_Checksum",
+      "CRC_Checksum_22",
+      "Pack_Current",
+      "Pack_CCL",
+      "Pack_DCL",
+      "Pack_Open_Volta",
+      "TSB HighTemp",
+      "Pack_SOC",
+      "Cell Low",
+      "Therm1_Val",
+      "Therm1_LowVal",
+      "Therm1_HighVal",
+      "Therm2_Val",
+      "Therm2_LowVal",
+      "Therm2_HighVal",
+      "Therm1_ID",
+      "Therm1_ModNum",
+      "AN3",
+      "AN6",
+      "VBAT",
+      "Int Temp",
+      "CAN1 Load",
+      "CAN1 ERRORS",
+      "CAN2 ERRORS",
+      "ALARMS1",
+      "uFLAGS1",
+      "RTD",
+      "Energized",
+      "LV Low",
+      "Motor Temp High",
+      "MC Temp High",
+      "Logging",
+      "TSB Temp",
+      "Stop Logging",
+      "WATER T ALM"
+    ]
+  },
+  "channels": [
+    {
+      "name": "AC Current",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": -38.0,
+      "max": 380.2,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "ACC Lat",
+      "unit": "g",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 339,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ACC Long",
+      "unit": "g",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 339,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ACC Vert",
+      "unit": "g",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 339,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "ALARMS1",
+      "unit": "decimal",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "AN3",
+      "unit": "V",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 4.858,
+      "max": 4.868,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "AN6",
+      "unit": "V",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.015,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Actual_Brake",
+      "unit": "%",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Actual_FOC_id",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Actual_FOC_iq",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "CAN1 ERRORS",
+      "unit": "hex",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 16.0,
+      "max": 32.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "CAN1 Load",
+      "unit": "%",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "CAN2 ERRORS",
+      "unit": "decimal",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "CRC_Checksum",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "CRC_Checksum_22",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Cell Low",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 20.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "CellId",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "DC Current",
+      "unit": "A",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 129.5,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Drive Enable",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "boolean",
+      "is_constant": false
+    },
+    {
+      "name": "Energized",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "boolean",
+      "is_constant": false
+    },
+    {
+      "name": "Fault Code",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 4.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Flowrate",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 4132.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Int Temp",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 34.0,
+      "max": 41.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "LV Low",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Logging",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "boolean",
+      "is_constant": false
+    },
+    {
+      "name": "MC Duty Cycle",
+      "unit": "%",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": -33.8,
+      "max": 95.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "MC Temp",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 25.0,
+      "max": 68.9,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "MC Temp High",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "boolean",
+      "is_constant": false
+    },
+    {
+      "name": "MC Throttle",
+      "unit": "%",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "MC Volts",
+      "unit": "V",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 1.0,
+      "max": 341.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Motor RPM",
+      "unit": "Rpm",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": -1014.0,
+      "max": 3326.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Motor Temp",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 22.9,
+      "max": 61.9,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Motor Temp High",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "boolean",
+      "is_constant": false
+    },
+    {
+      "name": "Pack_CCL",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 13.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Pack_Current",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": -16.9,
+      "max": 161.1,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Pack_DCL",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 190.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Pack_Open_Volta",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "Pack_SOC",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 41.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Pitch Rate",
+      "unit": "deg/sec",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 339,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "RTD",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "boolean",
+      "is_constant": false
+    },
+    {
+      "name": "RadIn_Temp",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 32.0,
+      "max": 61.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "RadOut_Tem",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 29.0,
+      "max": 58.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Relay_State",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Roll Rate",
+      "unit": "deg/sec",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 339,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Rolling_Counter",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Stop Logging",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "inferred_type": "boolean",
+      "is_constant": false
+    },
+    {
+      "name": "TSB HighTemp",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 41.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "TSB Temp",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Therm1_HighVal",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 41.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Therm1_ID",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": -851583.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Therm1_LowVal",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 20.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Therm1_ModNum",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 8.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Therm1_Val",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 41.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Therm2_HighVal",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 41.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Therm2_LowVal",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 39.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "Therm2_Val",
+      "unit": "°C",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 41.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    },
+    {
+      "name": "VBAT",
+      "unit": "V",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 13.244,
+      "max": 14.817,
+      "inferred_type": "float",
+      "is_constant": false
+    },
+    {
+      "name": "WATER T ALM",
+      "unit": null,
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "Yaw Rate",
+      "unit": "deg/sec",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 339,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 0.0,
+      "inferred_type": "integer",
+      "is_constant": true
+    },
+    {
+      "name": "uFLAGS1",
+      "unit": "decimal",
+      "platforms": [
+        "ev-2026"
+      ],
+      "n": 15165,
+      "n_missing": 0,
+      "min": 0.0,
+      "max": 160.0,
+      "inferred_type": "integer",
+      "is_constant": false
+    }
+  ],
+  "duplicate_groups": [
+    [
+      "Drive Day 7_18/Tristan Drive/2026-7-18   20.02.21.csv",
+      "Drive Day 7_18/Yianni Drive/2026-7-18   20.02.21.csv"
+    ],
+    [
+      "Drive Day 7_18/Tristan Drive/2026-7-18   20.06.15.csv",
+      "Drive Day 7_18/Yianni Drive/2026-7-18   20.06.15.csv"
+    ],
+    [
+      "Drive Day 7_18/Tristan Drive/2026-7-18   20.08.05.csv",
+      "Drive Day 7_18/Yianni Drive/2026-7-18   20.08.05.csv"
+    ],
+    [
+      "Drive Day 7_18/Tristan Drive/2026-7-18   20.10.00.csv",
+      "Drive Day 7_18/Yianni Drive/2026-7-18   20.10.00.csv"
+    ],
+    [
+      "Drive Day 7_18/Tristan Drive/2026-7-18   20.14.12.csv",
+      "Drive Day 7_18/Yianni Drive/2026-7-18   20.14.12 (Still Pump Run).csv"
+    ]
+  ],
+  "unreadable": []
+}
