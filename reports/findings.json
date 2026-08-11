@@ -1,0 +1,576 @@
+[
+  {
+    "check_id": "integrity.duplicate_content",
+    "severity": "warning",
+    "scope": "2026",
+    "subject": "Drive Day 7_18/Tristan Drive/2026-7-18   20.02.21.csv",
+    "detail": "identical content also filed as Drive Day 7_18/Yianni Drive/2026-7-18   20.02.21.csv"
+  },
+  {
+    "check_id": "integrity.duplicate_content",
+    "severity": "warning",
+    "scope": "2026",
+    "subject": "Drive Day 7_18/Tristan Drive/2026-7-18   20.06.15.csv",
+    "detail": "identical content also filed as Drive Day 7_18/Yianni Drive/2026-7-18   20.06.15.csv"
+  },
+  {
+    "check_id": "integrity.duplicate_content",
+    "severity": "warning",
+    "scope": "2026",
+    "subject": "Drive Day 7_18/Tristan Drive/2026-7-18   20.08.05.csv",
+    "detail": "identical content also filed as Drive Day 7_18/Yianni Drive/2026-7-18   20.08.05.csv"
+  },
+  {
+    "check_id": "integrity.duplicate_content",
+    "severity": "warning",
+    "scope": "2026",
+    "subject": "Drive Day 7_18/Tristan Drive/2026-7-18   20.10.00.csv",
+    "detail": "identical content also filed as Drive Day 7_18/Yianni Drive/2026-7-18   20.10.00.csv"
+  },
+  {
+    "check_id": "integrity.duplicate_content",
+    "severity": "warning",
+    "scope": "2026",
+    "subject": "Drive Day 7_18/Tristan Drive/2026-7-18   20.14.12.csv",
+    "detail": "identical content also filed as Drive Day 7_18/Yianni Drive/2026-7-18   20.14.12 (Still Pump Run).csv"
+  },
+  {
+    "check_id": "quality.out_of_spec_range",
+    "severity": "warning",
+    "scope": "2023",
+    "subject": "ECU BatteryVolt",
+    "detail": "observed 5.9288 to 13.6944, spec is 8 to 16"
+  },
+  {
+    "check_id": "quality.out_of_spec_range",
+    "severity": "warning",
+    "scope": "2023",
+    "subject": "ECU Lambda1",
+    "detail": "observed 0.004 to 4.6327, spec is 0.6 to 1.3"
+  },
+  {
+    "check_id": "quality.out_of_spec_range",
+    "severity": "warning",
+    "scope": "2023",
+    "subject": "ECU RPM",
+    "detail": "observed 0 to 14706.2, spec is 0 to 14000"
+  },
+  {
+    "check_id": "quality.out_of_spec_range",
+    "severity": "warning",
+    "scope": "2023",
+    "subject": "Rear Brake",
+    "detail": "observed -1.9659 to 72.9145, spec is 0 to 100"
+  },
+  {
+    "check_id": "quality.out_of_spec_range",
+    "severity": "warning",
+    "scope": "2026",
+    "subject": "Flowrate",
+    "detail": "observed 0 to 4132, spec is 0 to 40"
+  },
+  {
+    "check_id": "integrity.schema_drift",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "c04d20aa28c5",
+    "detail": "missing 6 channels present elsewhere in the drop: ACC Lat, ACC Long, ACC Vert, Pitch Rate, Roll Rate, Yaw Rate"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "Av3E9 7",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU AuxRPMLimSw",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU BatteryLtSw",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU BrakePedSw",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU CheckEngLtSw",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU ClutchSw",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU Cru Last T S",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU Crui Spd Err",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU Cruise Ctr S",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU Cruise Trg S",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU FlatShSw",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU FuelTrimLTB1",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU FuelTrimLTB2",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU FuelTrimSTB1",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU FuelTrimSTB2",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU Gear",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU Gear 2",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GearSwitch",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenOut1DT",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenericSen10",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenericSen3",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenericSen4",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenericSen5",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenericSen6",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenericSen7",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenericSen8",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU GenericSen9",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU InjDT2",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU InjectionDT3 dup 1",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU InjectionDT3 dup 2",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU InjectionDT4 dup 1",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU InjectionDT4 dup 2",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU KnockLev1",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU KnockLev2",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU Laun Ctr Sw",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU RaceTimer",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU TorDrRPMEI",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU TorDrRPMIC",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU TorqCIgnCorr dup 1",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU TorqCIgnCorr dup 2",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU TorqDrvsRPME",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU TorqDrvsRPMT",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU VehSpeed",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU WheelDiff",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU WheelSlip",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU WheelSpdFL",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU WheelSpdFR",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU WheelSpdRL",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "ECU WheelSpdRR",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2023",
+    "subject": "PreCalcGear",
+    "detail": "constant at 0 across 40,460 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "ACC Lat",
+    "detail": "constant at 0 across 339 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "ACC Long",
+    "detail": "constant at 0 across 339 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "ACC Vert",
+    "detail": "constant at 0 across 339 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "ALARMS1",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "Actual_Brake",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "Actual_FOC_id",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "Actual_FOC_iq",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "CAN1 Load",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "CAN2 ERRORS",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "CRC_Checksum",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "CRC_Checksum_22",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "CellId",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "LV Low",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "MC Throttle",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "Pitch Rate",
+    "detail": "constant at 0 across 339 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "Relay_State",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "Roll Rate",
+    "detail": "constant at 0 across 339 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "Rolling_Counter",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "TSB Temp",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "WATER T ALM",
+    "detail": "constant at 0 across 15,165 samples"
+  },
+  {
+    "check_id": "quality.constant_channel",
+    "severity": "info",
+    "scope": "2026",
+    "subject": "Yaw Rate",
+    "detail": "constant at 0 across 339 samples"
+  }
+]

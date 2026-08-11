@@ -1,9 +1,15 @@
 import argparse
+import json
+import sys
+from collections import Counter
+from dataclasses import asdict
 from pathlib import Path
 
 import uvicorn
 
 import config
+from checks.base import SEVERITIES, CheckContext, run_checks
+from checks.render import report as findings_report
 from db.connection import Database
 from db.repository import ReadingRepository
 from db.schema_manager import SchemaManager
@@ -61,6 +67,22 @@ def profile(path=None):
         )
 
 
+def check(path=None) -> int:
+    profiles = {drop.name: Profiler().run(drop) for drop in drop_dirs(path)}
+    findings = run_checks(CheckContext(profiles=profiles, specs=SpecLoader().load()))
+    config.REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    (config.REPORTS_DIR / "findings.json").write_text(
+        json.dumps([asdict(f) for f in findings], indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    (config.REPORTS_DIR / "findings.md").write_text(
+        findings_report(findings), encoding="utf-8"
+    )
+    counts = Counter(f.severity for f in findings)
+    print(", ".join(f"{severity}: {counts.get(severity, 0)}" for severity in SEVERITIES))
+    return 1 if counts.get("error") else 0
+
+
 def serve():
     uvicorn.run("api.app:app", host=config.API_HOST, port=config.API_PORT)
 
@@ -68,12 +90,14 @@ def serve():
 def main():
     parser = argparse.ArgumentParser(description="FSAE telemetry pipeline")
     parser.add_argument("command", nargs="?", default="all",
-                        choices=["profile", "ingest", "serve", "all"])
+                        choices=["profile", "check", "ingest", "serve", "all"])
     parser.add_argument("path", nargs="?", help="drop directory (default: every one under data/raw)")
     args = parser.parse_args()
     if args.command == "profile":
         profile(args.path)
         return
+    if args.command == "check":
+        sys.exit(check(args.path))
     if args.command in ("ingest", "all"):
         ingest(Database())
     if args.command in ("serve", "all"):

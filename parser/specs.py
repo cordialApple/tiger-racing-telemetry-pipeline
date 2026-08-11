@@ -5,27 +5,39 @@ from parser.models import SensorSpec
 
 
 class SpecLoader:
-    def __init__(self, path=config.SPECS_PATH):
-        self.path = Path(path)
+    def __init__(self, paths=None):
+        self.paths = self._resolve(paths)
 
     def load(self) -> list[SensorSpec]:
         specs = []
-        for cells in self._table_rows():
-            name, description, data_type, unit, min_range, max_range = cells[:6]
-            specs.append(SensorSpec(
-                name=name,
-                description=description,
-                unit=unit or None,
-                data_type=data_type,
-                min_range=self._to_float(min_range),
-                max_range=self._to_float(max_range),
-            ))
+        for path in self.paths:
+            for cells in self._table_rows(path):
+                name, description, data_type, unit, min_range, max_range = cells[:6]
+                specs.append(SensorSpec(
+                    name=name,
+                    description=description,
+                    unit=unit or None,
+                    data_type=data_type,
+                    min_range=self._to_float(min_range),
+                    max_range=self._to_float(max_range),
+                ))
         return specs
 
-    def _table_rows(self) -> list[list[str]]:
+    @staticmethod
+    def _resolve(paths) -> list[Path]:
+        if paths is None:
+            return sorted(
+                p for p in config.DOCS_DIR.glob("sensorspecs*.md")
+                if not p.name.endswith(".draft.md")
+            )
+        if isinstance(paths, (str, Path)):
+            return [Path(paths)]
+        return [Path(p) for p in paths]
+
+    def _table_rows(self, path: Path) -> list[list[str]]:
         rows = []
         header_seen = False
-        for line in self.path.read_text().splitlines():
+        for line in path.read_text(encoding="utf-8").splitlines():
             line = line.strip()
             if not line.startswith("|"):
                 continue
