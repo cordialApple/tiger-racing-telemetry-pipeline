@@ -7,7 +7,7 @@ from db.connection import Database
 from db.repository import ReadingRepository
 from db.schema_manager import SchemaManager
 from loader.pipeline import Pipeline
-from parser.aim_parser import AimParser
+from parser.registry import default_registry
 from parser.specs import SpecLoader
 from parser.validator import SensorValidator
 
@@ -16,7 +16,7 @@ def build_pipeline(db):
     specs = SpecLoader().load()
     return Pipeline(
         db, config.RAW_DIR, config.PROCESSED_DIR,
-        AimParser(), SensorValidator(specs),
+        default_registry(), SensorValidator(specs),
         ReadingRepository(), specs,
     )
 

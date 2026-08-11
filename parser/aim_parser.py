@@ -13,6 +13,11 @@ _META_ROWS = 13
 
 
 class AimParser:
+    platform = "ice-2023"
+
+    def sniff(self, head: str) -> bool:
+        return head.startswith('"Format","AiM CSV File"')
+
     def parse(self, path) -> ParsedSession:
         path = Path(path)
         raw = path.read_bytes()
@@ -67,6 +72,8 @@ class AimParser:
             sample_rate_hz=int(meta["Sample Rate"]),
             duration_s=int(meta["Duration"]) if meta.get("Duration") else None,
             segment_times=meta.get("Segment Times") or None,
+            platform=self.platform,
+            event=None,
         )
 
     def _readings(self, data_lines, sensors, started_at, period):

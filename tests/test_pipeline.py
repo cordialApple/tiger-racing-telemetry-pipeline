@@ -51,6 +51,7 @@ class FakeParser:
             championship=None, session_name=None, comment=None,
             started_at=datetime(2023, 10, 7, tzinfo=timezone.utc),
             sample_rate_hz=20, duration_s=1, segment_times=None,
+            platform="fake", event=None,
         )
         readings = [(meta.started_at, "ECU RPM", 1000.0), (meta.started_at, "ECU RPM", 2000.0)]
         return ParsedSession(meta, {"ECU RPM": "rpm"}, readings, path.stem, 1)

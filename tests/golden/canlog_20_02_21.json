@@ -1,0 +1,22 @@
+{
+  "source_file": "2026-7-18   20.02.21.csv",
+  "session_id": "2026-07-18_200221_tristan",
+  "platform": "ev-2026",
+  "racer": "Tristan",
+  "event": "Drive Day 7_18",
+  "comment": null,
+  "started_at": "2026-07-18T20:02:21.025000-05:00",
+  "sample_rate_hz": 10,
+  "duration_s": 90,
+  "row_count": 897,
+  "reading_count": 48438,
+  "sensor_count": 54,
+  "unit_mc_temp": "°C",
+  "unit_flowrate": null,
+  "time_column_present": false,
+  "rpm_spacing_ms": 100.0,
+  "rpm_min": -18.1,
+  "rpm_max": 3136.5,
+  "rpm_avg": 1075.29,
+  "rpm_n": 897
+}

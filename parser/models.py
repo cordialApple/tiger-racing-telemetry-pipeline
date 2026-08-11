@@ -25,6 +25,8 @@ class SessionMeta:
     sample_rate_hz: int
     duration_s: int | None
     segment_times: str | None
+    platform: str
+    event: str | None
 
 
 @dataclass
