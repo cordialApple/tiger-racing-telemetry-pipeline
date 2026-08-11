@@ -1,6 +1,6 @@
 # Tiger Racing Telemetry Pipeline
 
-> Offline pipeline that turns 2023 AiM logger exports into a queryable TimescaleDB and serves them to a Power BI performance dashboard.
+> Offline pipeline that turns two seasons of Formula SAE logger exports, a 2023 AiM combustion car and a 2026 CAN electric car, into a queryable TimescaleDB and serves them to a Power BI performance dashboard.
 
 [![tests](https://github.com/cordialApple/tiger-racing-telemetry-pipeline/actions/workflows/tests.yml/badge.svg)](https://github.com/cordialApple/tiger-racing-telemetry-pipeline/actions/workflows/tests.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org)
@@ -14,9 +14,9 @@
 
 Telemetry from two Formula SAE cars, one directory per season under `data/raw/`:
 
-- **2023** — combustion car, AiM logger, 18 sessions from one evening at UTA
+- **2023**: combustion car, AiM logger, 18 sessions from one evening at UTA
   Autocross on Oct 7 2023.
-- **2026** — electric car, CAN logger, 26 files from the Jul 18 drive day, nested
+- **2026**: electric car, CAN logger, 26 files from the Jul 18 drive day, nested
   by event and driver. Disjoint channel set from 2023; no channel names overlap.
 
 The pipeline ingests the raw CSV exports, lands them in TimescaleDB, and serves
@@ -28,7 +28,7 @@ SQL views to Power BI. The dashboard above is the payoff.
 - **TimescaleDB hypertable.** Long-format `(ts, session_id, sensor_name, value)` with a 1 Hz continuous aggregate.
 - **Typed REST API.** FastAPI endpoints with fixed, Pydantic-validated column sets for Power BI.
 - **Per-file error isolation.** One bad session fails alone; the rest of the batch loads.
-- **Findings that matter.** The 2023 analysis surfaced oil starvation under cornering, cooling limits, dead channels, and low throttle usage. See [`reports/`](reports/README.md).
+- **Findings that matter.** 2023 surfaced oil starvation under cornering, cooling limits, dead channels, and low throttle usage. 2026 surfaced a controller fault code live for 22% of the drive day and an out-of-range flowrate sensor. See [`reports/`](reports/README.md).
 
 ## Architecture
 
@@ -48,7 +48,7 @@ load → TimescaleDB hypertable      loader/  db/
 SQL views → FastAPI REST API       db/views/  api/
     │
     ▼
-Power BI dashboard                 reports/
+Power BI dashboard                 powerbi/  reports/
 ```
 
 ## Quick Start
@@ -81,8 +81,10 @@ parser/           CSV cleaner, AiM parser, sensor spec loader, advisory validato
 db/               psycopg connection, schema (.sql per table), repository, views/
 loader/           ingestion pipeline (per-file error isolation)
 api/              FastAPI REST API consumed by Power BI (serving layer over the views)
+powerbi/          PBIP project (TMDL semantic model + PBIR report), the dashboard source
 reports/          rendered Power BI dashboards (screenshots) and findings writeup
 docs/             sensorspecs-<platform>.md (advisory sensor ranges, one per car)
+tests/            pytest suite; db-marked tests skip without a reachable TimescaleDB
 main.py           entrypoint (profile / check / ingest / serve / all)
 ```
 
