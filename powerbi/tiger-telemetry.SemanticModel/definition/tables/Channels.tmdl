@@ -1,0 +1,110 @@
+/// Channel dimension: per-session sensor metadata with signal stats, from GET /sessions/{id}/sensors (v_session_channels).
+table Channels
+	lineageTag: 7369ef31-c3cc-42ed-946a-aead376c2e64
+
+	measure 'Channel Count' = COUNTROWS(Channels)
+		formatString: #,0
+		displayFolder: Health
+		lineageTag: c7ac8fe0-19e2-4244-883e-3924a4a0a124
+
+	/// Channels that carried signal (non-flat) in scope.
+	measure 'Live Channels' = CALCULATE(COUNTROWS(Channels), Channels[has_signal] = TRUE())
+		formatString: #,0
+		displayFolder: Health
+		lineageTag: 67cc9f08-de54-48e9-97e2-34152af2f75f
+
+	/// Share of channels carrying signal : sensor wiring health.
+	measure 'Channel Health %' = DIVIDE([Live Channels], [Channel Count])
+		formatString: 0.0%
+		displayFolder: Health
+		lineageTag: 9206cf4d-92f0-4c23-b611-8bac3720c40d
+
+	column channel_key
+		dataType: string
+		isHidden
+		lineageTag: af74e043-d207-4460-80f0-6321916706bc
+		sourceColumn: channel_key
+
+	column session_id
+		dataType: string
+		lineageTag: 783f9f53-4a24-4043-838d-745d775f3a14
+		sourceColumn: session_id
+
+	column sensor_name
+		dataType: string
+		lineageTag: bedca60e-cde4-48ce-bfd0-0f4d9c9738ef
+		sourceColumn: sensor_name
+
+	column platform
+		dataType: string
+		lineageTag: 3b1c0f2e-9a44-4d51-8c67-1f0d5b9e2a71
+		sourceColumn: platform
+
+	column description
+		dataType: string
+		lineageTag: f3c583ef-b1ff-41ff-b806-c2378e5e7bdf
+		sourceColumn: description
+
+	column unit
+		dataType: string
+		lineageTag: cb480b31-2242-4d58-8bc5-558196371d59
+		sourceColumn: unit
+
+	column data_type
+		dataType: string
+		lineageTag: 829beb80-66c9-4ca6-a720-92983a45f378
+		sourceColumn: data_type
+
+	column min_range
+		dataType: double
+		formatString: 0.##
+		lineageTag: 2727d10f-f376-4103-b15a-fccb40d48b38
+		sourceColumn: min_range
+
+	column max_range
+		dataType: double
+		formatString: 0.##
+		lineageTag: 209f1b53-3fc5-4013-9da1-1c6667f1cd07
+		sourceColumn: max_range
+
+	column n
+		dataType: int64
+		formatString: #,0
+		lineageTag: fa8ce75e-08ba-47ec-b163-1c660017015f
+		sourceColumn: n
+
+	column avg_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: 321b9ace-d664-4319-b52a-3693fb52ca6d
+		sourceColumn: avg_value
+
+	column min_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: cc0dd1f9-78d6-496d-bc82-6c3d78949170
+		sourceColumn: min_value
+
+	column max_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: 55f19195-04b4-45d1-94a2-e24a831ea387
+		sourceColumn: max_value
+
+	column has_signal
+		dataType: boolean
+		lineageTag: a40adf31-591c-4289-a964-5ad37d92076f
+		sourceColumn: has_signal
+
+	partition Channels_Partition = m
+		mode: import
+		source =
+				let
+				    base = "http://localhost:8000",
+				    ids = List.Transform(Json.Document(Web.Contents(base, [RelativePath = "sessions"])), each [session_id]),
+				    fetch = (id as text) => Table.FromRecords(Json.Document(Web.Contents(base, [RelativePath = "sessions/" & Uri.EscapeDataString(id) & "/sensors"])), {"session_id", "sensor_name", "platform", "description", "unit", "data_type", "min_range", "max_range", "n", "avg_value", "min_value", "max_value", "has_signal"}, MissingField.UseNull),
+				    combined = Table.Combine(List.Transform(ids, fetch)),
+				    keyed = Table.AddColumn(combined, "channel_key", each [session_id] & "|" & [sensor_name], type text),
+				    typed = Table.TransformColumnTypes(keyed, {{"session_id", type text}, {"sensor_name", type text}, {"platform", type text}, {"description", type text}, {"unit", type text}, {"data_type", type text}, {"min_range", type number}, {"max_range", type number}, {"n", Int64.Type}, {"avg_value", type number}, {"min_value", type number}, {"max_value", type number}, {"has_signal", type logical}, {"channel_key", type text}})
+				in
+				    typed

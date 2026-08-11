@@ -6,10 +6,13 @@ from pydantic import BaseModel
 class SessionCatalog(BaseModel):
     session_id: str
     source_file: str
+    platform: str | None
+    event: str | None
     vehicle: str | None
     racer: str | None
     championship: str | None
     session_name: str | None
+    comment: str | None
     started_at: datetime
     duration_s: int | None
     sample_rate_hz: int
@@ -20,6 +23,7 @@ class SessionCatalog(BaseModel):
 class Channel(BaseModel):
     session_id: str
     sensor_name: str
+    platform: str | None
     description: str | None
     unit: str | None
     data_type: str

@@ -1,0 +1,205 @@
+/// 1 Hz readings fact: long-format downsampled telemetry for every session in GET /sessions, from GET /readings?downsample=1hz (v_sensor_1hz_enriched).
+table Readings
+	lineageTag: 12a1ab69-3000-460e-9d21-4f14f50a7492
+
+	measure 'Samples (1Hz)' = COUNTROWS(Readings)
+		formatString: #,0
+		displayFolder: Telemetry
+		lineageTag: fec3f56e-5e9b-40f1-a07d-09ffe856775b
+
+	measure 'Avg Value' = AVERAGE(Readings[value])
+		formatString: #,0.00
+		displayFolder: Telemetry
+		lineageTag: c5f5e3b4-3e8b-482d-9625-fd791a399d53
+
+	measure 'Peak Value' = MAX(Readings[max_value])
+		formatString: #,0.00
+		displayFolder: Telemetry
+		lineageTag: 97a3101f-988b-49e3-9919-e32d6d8290f8
+
+	measure 'Floor Value' = MIN(Readings[min_value])
+		formatString: #,0.00
+		displayFolder: Telemetry
+		lineageTag: c6b24435-7916-498b-b38f-6d30f3e07181
+
+	measure 'Max RPM' = CALCULATE(MAX(Readings[max_value]), Sensors[sensor_name] = "ECU RPM")
+		formatString: #,0
+		displayFolder: Engine
+		lineageTag: 8c530f98-b4ae-40bf-a7f3-d3fc2b4bfa86
+
+	measure 'Max Coolant Temp C' = CALCULATE(MAX(Readings[max_value]), Sensors[sensor_name] = "ECU CoolantTemp")
+		formatString: 0.0
+		displayFolder: Engine
+		lineageTag: 7d90c72b-8236-41fa-919a-59f5eddaddb2
+
+	measure 'Max Oil Temp C' = CALCULATE(MAX(Readings[max_value]), Sensors[sensor_name] = "Oil Temp")
+		formatString: 0.0
+		displayFolder: Engine
+		lineageTag: 042488c6-fc5a-488e-a166-e006e2af2732
+
+	/// Minimum non-zero oil pressure : zero rows (engine off) excluded.
+	measure 'Min Oil Pressure (bar)' = CALCULATE(MIN(Readings[min_value]), Sensors[sensor_name] = "Oil Pressure", Readings[min_value] > 0)
+		formatString: 0.00
+		displayFolder: Engine
+		lineageTag: f5755937-ba7f-4c76-b3ac-13cfc07a5bd9
+
+	measure 'Avg Lambda' = CALCULATE(AVERAGE(Readings[value]), Sensors[sensor_name] = "ECU Lambda1")
+		formatString: 0.000
+		displayFolder: Engine
+		lineageTag: fd4effbf-450a-4449-93d8-1384cc473094
+
+	/// Share of 1 Hz samples at ≥90% throttle : wide-open-throttle time.
+	measure 'WOT Time %' =
+			VAR wot = CALCULATE(COUNTROWS(FILTER(Readings, Readings[max_value] >= 90)), Sensors[sensor_name] = "ECU ThrottlePos")
+			VAR total = CALCULATE(COUNTROWS(Readings), Sensors[sensor_name] = "ECU ThrottlePos")
+			RETURN DIVIDE(wot, total)
+		formatString: 0.0%
+		displayFolder: Driver
+		lineageTag: 85e8bed0-a20b-4457-b2e5-3f949d1e7832
+
+	measure 'Max Brake (bar)' = CALCULATE(MAX(Readings[max_value]), Sensors[sensor_name] = "Rear Brake")
+		formatString: 0.0
+		displayFolder: Driver
+		lineageTag: f7ddfb37-fc3d-4bf2-a56b-83eb61fce50a
+
+	/// Peak absolute lateral acceleration : cornering grip.
+	measure 'Peak Lateral G' = CALCULATE(MAXX(Readings, MAX(ABS(Readings[min_value]), ABS(Readings[max_value]))), Sensors[sensor_name] = "LateralAcc")
+		formatString: 0.00
+		displayFolder: Dynamics
+		lineageTag: 37fc4cf2-f5c8-4ead-85f9-00bfa857f103
+
+	measure 'Peak Accel G' = CALCULATE(MAX(Readings[max_value]), Sensors[sensor_name] = "InlineAcc")
+		formatString: 0.00
+		displayFolder: Dynamics
+		lineageTag: 2e27854a-769f-4758-bd80-7736e83e9484
+
+	measure 'Peak Braking G' = CALCULATE(ABS(MIN(Readings[min_value])), Sensors[sensor_name] = "InlineAcc")
+		formatString: 0.00
+		displayFolder: Dynamics
+		lineageTag: 29a5ba1a-d256-4647-a507-fda72ac9a4b7
+
+	measure 'Peak Yaw Rate' = CALCULATE(MAXX(Readings, MAX(ABS(Readings[min_value]), ABS(Readings[max_value]))), Sensors[sensor_name] = "YawRate")
+		formatString: 0.0
+		displayFolder: Dynamics
+		lineageTag: 9e04edfc-401d-4712-b188-04094c468464
+
+	/// Average coolant temperature, channel pinned to ECU CoolantTemp so no slicer is needed.
+	measure 'Coolant Temp (C)' = CALCULATE(AVERAGE(Readings[avg_value]), Sensors[sensor_name] = "ECU CoolantTemp")
+		formatString: 0.0
+		displayFolder: Engine
+		lineageTag: 3f8a1c2e-9b4d-4e6f-a1b2-c3d4e5f60001
+
+	/// Seconds with coolant at or above 100 C (1 Hz rows = seconds).
+	measure 'Secs Above 100C' = CALCULATE(COUNTROWS(Readings), Sensors[sensor_name] = "ECU CoolantTemp", Readings[max_value] >= 100)
+		formatString: #,0
+		displayFolder: Engine
+		lineageTag: 3f8a1c2e-9b4d-4e6f-a1b2-c3d4e5f60002
+
+	/// Seconds where oil pressure dipped below 1.5 bar while RPM held 8000+, the oil-starvation exposure window.
+	measure 'Oil Dip Seconds (8k RPM)' =
+			VAR hot = CALCULATETABLE(VALUES(Readings[t_seconds]), Sensors[sensor_name] = "ECU RPM", Readings[avg_value] >= 8000)
+			VAR dip = CALCULATETABLE(VALUES(Readings[t_seconds]), Sensors[sensor_name] = "Oil Pressure", Readings[min_value] < 1.5)
+			RETURN COUNTROWS(INTERSECT(hot, dip))
+		formatString: #,0
+		displayFolder: Engine
+		lineageTag: 3f8a1c2e-9b4d-4e6f-a1b2-c3d4e5f60003
+
+	/// Lowest 1-second oil pressure during seconds where RPM held 8000+.
+	measure 'Min Oil P at 8k (bar)' =
+			VAR hot = CALCULATETABLE(VALUES(Readings[t_seconds]), Sensors[sensor_name] = "ECU RPM", Readings[avg_value] >= 8000)
+			RETURN CALCULATE(MIN(Readings[min_value]), Sensors[sensor_name] = "Oil Pressure", TREATAS(hot, Readings[t_seconds]))
+		formatString: 0.00
+		displayFolder: Engine
+		lineageTag: 3f8a1c2e-9b4d-4e6f-a1b2-c3d4e5f60004
+
+	/// Signed lateral acceleration (1 Hz average), for the friction-circle scatter.
+	measure 'Lat G (signed)' = CALCULATE(AVERAGE(Readings[value]), Sensors[sensor_name] = "LateralAcc")
+		formatString: 0.00
+		displayFolder: Dynamics
+		lineageTag: 3f8a1c2e-9b4d-4e6f-a1b2-c3d4e5f60005
+
+	/// Signed longitudinal acceleration (1 Hz average), for the friction-circle scatter.
+	measure 'Long G (signed)' = CALCULATE(AVERAGE(Readings[value]), Sensors[sensor_name] = "InlineAcc")
+		formatString: 0.00
+		displayFolder: Dynamics
+		lineageTag: 3f8a1c2e-9b4d-4e6f-a1b2-c3d4e5f60006
+
+	/// WOT share restricted to real runs: 60 s+ duration and 8000+ max RPM.
+	measure 'WOT Time % (Real Runs)' =
+			VAR real = FILTER(VALUES(Sessions[session_id]), CALCULATE(MAX(Sessions[duration_s])) >= 60 && [Max RPM] >= 8000)
+			RETURN CALCULATE([WOT Time %], KEEPFILTERS(real))
+		formatString: 0.0%
+		displayFolder: Driver
+		lineageTag: 3f8a1c2e-9b4d-4e6f-a1b2-c3d4e5f60007
+
+	column channel_key
+		dataType: string
+		isHidden
+		lineageTag: 2062fa89-0ee9-4b1f-be1e-48671b37bf19
+		sourceColumn: channel_key
+
+	column session_id
+		dataType: string
+		isHidden
+		lineageTag: 663a6d2b-88da-4c6b-b720-4a446f32783c
+		sourceColumn: session_id
+
+	column sensor_name
+		dataType: string
+		isHidden
+		lineageTag: 3d7fcb5d-7352-4301-8aa3-806135e9a62c
+		sourceColumn: sensor_name
+
+	column ts
+		dataType: dateTime
+		lineageTag: b8eefe79-f15c-44a3-8b7c-9c5004c92b7d
+		sourceColumn: ts
+
+	column t_seconds
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 717bd41d-fb1b-4dab-8a8a-42a9a904eceb
+		sourceColumn: t_seconds
+
+	column value
+		dataType: double
+		formatString: 0.00
+		lineageTag: b863b68a-b359-4093-8551-41455760192f
+		sourceColumn: value
+
+	column avg_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: 0fb6d95d-bda5-43af-8428-8edc1676c75f
+		sourceColumn: avg_value
+
+	column min_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: 701f33e3-7fde-43f9-9137-d01f797c2ae4
+		sourceColumn: min_value
+
+	column max_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: b4ec5890-237a-4114-87f9-ae9f59cb8fb2
+		sourceColumn: max_value
+
+	partition Readings_Partition = m
+		mode: import
+		source =
+				let
+				    base = "http://localhost:8000",
+				    ids = List.Transform(Json.Document(Web.Contents(base, [RelativePath = "sessions"])), each [session_id]),
+				    fetch = (id as text) =>
+				        let
+				            env = Json.Document(Web.Contents(base, [RelativePath = "readings", Query = [session_id = id, downsample = "1hz", limit = "500000"]])),
+				            rows = if env[total] > env[count] then error Error.Record("Pagination", "Session " & id & " exceeds the single-page limit", env[total]) else env[rows]
+				        in
+				            Table.FromRecords(rows, {"session_id", "sensor_name", "ts", "t_seconds", "value", "avg_value", "min_value", "max_value"}, MissingField.UseNull),
+				    combined = Table.Combine(List.Transform(ids, fetch)),
+				    keyed = Table.AddColumn(combined, "channel_key", each [session_id] & "|" & [sensor_name], type text),
+				    typed = Table.TransformColumnTypes(keyed, {{"session_id", type text}, {"sensor_name", type text}, {"ts", type datetimezone}, {"t_seconds", type number}, {"value", type number}, {"avg_value", type number}, {"min_value", type number}, {"max_value", type number}, {"channel_key", type text}}),
+				    final = Table.TransformColumns(typed, {"ts", DateTimeZone.RemoveZone, type datetime})
+				in
+				    final

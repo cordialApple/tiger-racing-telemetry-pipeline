@@ -36,7 +36,10 @@ SQL views to Power BI. The dashboard above is the payoff.
 data/raw/<season>/**/*.csv
     │
     ▼
-clean → validate → parse          parser/
+profile → check                    profiling/  checks/
+    │
+    ▼
+sniff → parse → validate           parser/
     │
     ▼
 load → TimescaleDB hypertable      loader/  db/
@@ -68,6 +71,9 @@ Defaults live in `config.py` and are overridable via `PGHOST`, `PGPORT`,
 
 ```
 config.py         centralized paths, API host/port, and DB connection defaults
+profiling/        DB-free dataset profiler, markdown report, draft spec generator
+checks/           discoverable data checks that regenerate reports/findings.*
+profiles/         committed golden profiles, one per drop, diffed by CI
 data/raw/2023/    AiM CSV exports from the 2023 combustion car (one file per session)
 data/raw/2026/    CAN logger exports from the 2026 EV, nested <event>/<driver>/
 data/processed/   files move here after a successful load, mirroring the raw layout
@@ -76,17 +82,24 @@ db/               psycopg connection, schema (.sql per table), repository, views
 loader/           ingestion pipeline (per-file error isolation)
 api/              FastAPI REST API consumed by Power BI (serving layer over the views)
 reports/          rendered Power BI dashboards (screenshots) and findings writeup
-docs/             sensorspecs.md (advisory sensor ranges)
-main.py           entrypoint (ingest / serve / all)
+docs/             sensorspecs-<platform>.md (advisory sensor ranges, one per car)
+main.py           entrypoint (profile / check / ingest / serve / all)
 ```
 
 ## Usage
 
 ```
+python main.py profile   # profile every drop under data/raw, refresh profiles/ and reports/
+python main.py check     # run checks/, rewrite reports/findings.*, exit 1 on any error
 python main.py ingest    # apply schema, then load every file in data/raw
 python main.py serve     # start the REST API
 python main.py all       # ingest then serve (default)
 ```
+
+Both `profile` and `check` are database-free. Profile a new drop before ingesting
+it: the profile records the channel set, sample spacing, duplicate groups, and
+per-channel extremes, and CI fails when a fresh run stops matching the committed
+copy in `profiles/`.
 
 Loading is idempotent: each file is keyed by a content hash in `ingestion_log`,
 so re-running skips files already loaded.
@@ -96,8 +109,10 @@ and the rest of the batch continues.
 
 ## Data Model
 
-- `sessions`: one row per logger file.
-- `sensors`: registry seeded from `docs/sensorspecs.md`.
+- `sessions`: one row per logger file, carrying `platform` and `event`.
+- `sensors`: registry seeded from every `docs/sensorspecs-<platform>.md`.
+- `ingestion_source`: every path a given content hash was filed under, so a file
+  copied into two drivers' folders keeps both attributions.
 - `sensor_readings`: long-format hypertable `(ts, session_id, sensor_name, value)`.
   Timestamps are synthesized from the session start at the file's sample rate.
   There are no FK constraints, since the pipeline enforces integrity and this keeps COPY fast.
@@ -123,7 +138,9 @@ and the rest of the batch continues.
 Point Power BI's Web/JSON connector at `http://localhost:8000`. Each endpoint
 returns one fixed column set, validated by a Pydantic `response_model`.
 
-- `GET /sessions`: Sessions dimension (from `v_session_catalog`).
+- `GET /sessions`: Sessions dimension (from `v_session_catalog`), including
+  `platform` (`ice-2023` / `ev-2026`), `event`, and the free-text `comment` the
+  team wrote into the filename.
 - `GET /sessions/{session_id}/sensors`: Channel dimension (from `v_session_channels`).
 - `GET /readings?session_id=&sensor=&start=&end=&downsample=1hz|raw&limit=&offset=`:
   paginated envelope `{session_id, sensor, downsample, limit, offset, total,
@@ -137,6 +154,12 @@ The star-schema mapping in Power BI:
 - `Sessions[session_id]` one-to-many `Readings[session_id]`
 - `Channels[session_id, sensor_name]` one-to-many `Readings[sensor_name]`
 - `Stats` relates by both keys as a parallel summary fact
+- `Sessions[platform]` slices the whole model by car and season
+
+`Channels`, `Readings`, and `Stats` each load through one Power Query partition
+that fans out over whatever `GET /sessions` returns, so a new season needs no
+model edit. `tests/test_powerbi_contract.py` asserts the requested column lists
+still match the Pydantic response models.
 
 ## Testing & CI
 

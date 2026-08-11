@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a000000000000000000f",
+  "position": {
+    "x": 268,
+    "y": 16,
+    "z": 200,
+    "width": 236,
+    "height": 104
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Max Oil Temp C"
+                }
+              },
+              "queryRef": "Readings.Max Oil Temp C",
+              "nativeQueryRef": "Max Oil Temp C"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

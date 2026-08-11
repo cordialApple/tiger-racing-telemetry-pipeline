@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a000000000000000000b",
+  "position": {
+    "x": 16,
+    "y": 588,
+    "z": 300,
+    "width": 280,
+    "height": 116
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Samples (1Hz)"
+                }
+              },
+              "queryRef": "Readings.Samples (1Hz)",
+              "nativeQueryRef": "Samples (1Hz)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

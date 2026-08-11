@@ -1,0 +1,129 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a000000000000000000d",
+  "position": {
+    "x": 312,
+    "y": 462,
+    "z": 500,
+    "width": 952,
+    "height": 242
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sensors"
+                    }
+                  },
+                  "Property": "sensor_name"
+                }
+              },
+              "queryRef": "Sensors.sensor_name",
+              "nativeQueryRef": "sensor_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sensors"
+                    }
+                  },
+                  "Property": "unit"
+                }
+              },
+              "queryRef": "Sensors.unit",
+              "nativeQueryRef": "unit"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Avg Value"
+                }
+              },
+              "queryRef": "Readings.Avg Value",
+              "nativeQueryRef": "Avg Value"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Peak Value"
+                }
+              },
+              "queryRef": "Readings.Peak Value",
+              "nativeQueryRef": "Peak Value"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Floor Value"
+                }
+              },
+              "queryRef": "Readings.Floor Value",
+              "nativeQueryRef": "Floor Value"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Samples (1Hz)"
+                }
+              },
+              "queryRef": "Readings.Samples (1Hz)",
+              "nativeQueryRef": "Samples (1Hz)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Channel Summary'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

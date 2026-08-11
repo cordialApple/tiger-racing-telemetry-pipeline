@@ -1,0 +1,119 @@
+/// Session dimension: one row per logger file across every car and season, from GET /sessions (v_session_catalog).
+table Sessions
+	lineageTag: 6aebc41f-4591-4c68-84f2-874c61363db5
+
+	/// Number of logged sessions in scope.
+	measure 'Sessions Count' = COUNTROWS(Sessions)
+		formatString: #,0
+		displayFolder: Season
+		lineageTag: 0df41d52-97c2-43ef-9141-9c3913c9da2b
+
+	/// Total logged time in minutes.
+	measure 'Track Time (min)' = DIVIDE(SUM(Sessions[duration_s]), 60)
+		formatString: #,0.0
+		displayFolder: Season
+		lineageTag: bf913115-11f5-4b00-b4c9-259e68eac3d4
+
+	measure 'Avg Session (min)' = AVERAGEX(Sessions, DIVIDE(Sessions[duration_s], 60))
+		formatString: 0.0
+		displayFolder: Season
+		lineageTag: 1cf0471e-dd3e-477b-9d20-9525f32e095e
+
+	/// Total raw (full-rate) readings ingested.
+	measure 'Raw Readings' = SUM(Sessions[reading_count])
+		formatString: #,0
+		displayFolder: Season
+		lineageTag: 952d09d0-e79e-4b76-8c10-e7a824c0a977
+
+	column session_id
+		dataType: string
+		lineageTag: 31ffc40d-e6e7-4ae6-b9d7-484da51b443b
+		sourceColumn: session_id
+
+	column source_file
+		dataType: string
+		lineageTag: c6c14228-a027-4a7a-ace6-27333125cb15
+		sourceColumn: source_file
+
+	/// Car and season the session was logged on, e.g. ice-2023 or ev-2026.
+	column platform
+		dataType: string
+		lineageTag: 4d2a91c7-6b83-4f0e-9a52-7c1e83b40d96
+		sourceColumn: platform
+
+	/// Test day the session belongs to, from the folder the file was filed under.
+	column event
+		dataType: string
+		lineageTag: 5e3b02d8-7c94-4f1a-8b63-8d2f94c51e07
+		sourceColumn: event
+
+	/// Free-text note the team wrote into the filename, e.g. Weird FlowRate.
+	column comment
+		dataType: string
+		lineageTag: 6f4c13e9-8da5-401b-9c74-9e3a05d62f18
+		sourceColumn: comment
+
+	column vehicle
+		dataType: string
+		lineageTag: a1e6c64f-357e-4234-adec-12ee1f31457d
+		sourceColumn: vehicle
+
+	column racer
+		dataType: string
+		lineageTag: 919afc5c-c110-4a15-90ff-b5cc8c6c516c
+		sourceColumn: racer
+
+	column championship
+		dataType: string
+		lineageTag: 9a90403e-9fc9-4347-ae9a-94b54c661ceb
+		sourceColumn: championship
+
+	column session_name
+		dataType: string
+		lineageTag: f5f750df-f8fc-4a5c-a569-cdd6937e460d
+		sourceColumn: session_name
+
+	column started_at
+		dataType: dateTime
+		lineageTag: 6215f5dc-ba15-45e4-b27a-99b768e66b0e
+		sourceColumn: started_at
+
+	column duration_s
+		dataType: int64
+		formatString: #,0
+		lineageTag: 8964f1ba-63dd-46c2-88ea-cf8e454652f3
+		sourceColumn: duration_s
+
+	column sample_rate_hz
+		dataType: int64
+		lineageTag: 1e4db232-1a87-4160-a682-a537bcc0681f
+		sourceColumn: sample_rate_hz
+
+	column reading_count
+		dataType: int64
+		formatString: #,0
+		lineageTag: bd3d1408-25dd-4cfc-b0d6-654c84ee25c9
+		sourceColumn: reading_count
+
+	/// Chronological sort key; session_id is only numeric on the 2023 car.
+	column session_no = INT(Sessions[started_at] * 86400)
+		isHidden
+		lineageTag: 062d0a65-5d62-4c3a-9f46-47494488e4a9
+
+	/// Logger session names are mostly 'NO GPS', so label by start time and driver.
+	column 'Session Label' = FORMAT(Sessions[started_at], "MMM d HH:mm") & " · " & COALESCE(Sessions[racer], Sessions[session_id])
+		lineageTag: 8c31f89c-7834-43fb-81b6-fca555fcbc1e
+		sortByColumn: session_no
+
+	partition Sessions_Partition = m
+		mode: import
+		source =
+				let
+				    base = "http://localhost:8000",
+				    raw = Json.Document(Web.Contents(base, [RelativePath = "sessions"])),
+				    tbl = Table.FromRecords(raw, {"session_id", "source_file", "platform", "event", "vehicle", "racer", "championship", "session_name", "comment", "started_at", "duration_s", "sample_rate_hz", "reading_count"}, MissingField.UseNull),
+				    typed = Table.TransformColumnTypes(tbl, {{"session_id", type text}, {"source_file", type text}, {"platform", type text}, {"event", type text}, {"vehicle", type text}, {"racer", type text}, {"championship", type text}, {"session_name", type text}, {"comment", type text}, {"started_at", type datetimezone}, {"duration_s", Int64.Type}, {"sample_rate_hz", Int64.Type}, {"reading_count", Int64.Type}}),
+				    final = Table.TransformColumns(typed, {{"started_at", DateTimeZone.RemoveZone, type datetime}})
+				in
+				    final
+

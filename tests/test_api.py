@@ -5,13 +5,15 @@ from api import app
 client = TestClient(app.app)
 
 CATALOG = [
-    {"session_id": "s1", "source_file": "1.csv", "vehicle": "TR23", "racer": "A",
-     "championship": None, "session_name": None,
+    {"session_id": "s1", "source_file": "2023/1.csv", "platform": "ice-2023",
+     "event": None, "vehicle": "TR23", "racer": "A", "championship": None,
+     "session_name": None, "comment": None,
      "started_at": "2023-01-01T00:00:00", "duration_s": None, "sample_rate_hz": 20,
      "reading_count": None, "loaded_at": None},
-    {"session_id": "s2", "source_file": "2.csv", "vehicle": "TR23", "racer": "B",
-     "championship": None, "session_name": None,
-     "started_at": "2023-02-01T00:00:00", "duration_s": None, "sample_rate_hz": 20,
+    {"session_id": "s2", "source_file": "2026/Ryan Drive/2.csv", "platform": "ev-2026",
+     "event": "Drive Day 7_18", "vehicle": None, "racer": "Ryan", "championship": None,
+     "session_name": None, "comment": "Weird FlowRate",
+     "started_at": "2026-07-18T00:00:00", "duration_s": None, "sample_rate_hz": 10,
      "reading_count": None, "loaded_at": None},
 ]
 
@@ -21,7 +23,8 @@ STATS = [
 ]
 
 CHANNELS = [{
-    "session_id": "s1", "sensor_name": "ECU RPM", "description": "Engine RPM",
+    "session_id": "s1", "sensor_name": "ECU RPM", "platform": "ice-2023",
+    "description": "Engine RPM",
     "unit": "rpm", "data_type": "integer", "min_range": 0, "max_range": 14000,
     "n": 1800, "avg_value": 3003.0, "min_value": 363.8, "max_value": 6860.6,
     "has_signal": True,

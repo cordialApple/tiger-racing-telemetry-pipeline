@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "tiger-telemetry"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6ad734a0-5343-4cb4-9e25-7d4511dc70c6"
+  }
+}

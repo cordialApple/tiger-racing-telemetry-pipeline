@@ -1,0 +1,58 @@
+/// Per session/sensor summary fact: count, avg, min, max over the full raw feed for every session in GET /sessions, from GET /stats (v_session_sensor_stats).
+table Stats
+	lineageTag: 81cfcba1-ce1b-4a8f-8972-a134e9516c21
+
+	column channel_key
+		dataType: string
+		isHidden
+		lineageTag: c0154856-febd-4e48-a21a-959f21ffe5ad
+		sourceColumn: channel_key
+
+	column session_id
+		dataType: string
+		isHidden
+		lineageTag: 14514db4-3694-498b-9ed5-cf3a3ed980c1
+		sourceColumn: session_id
+
+	column sensor_name
+		dataType: string
+		isHidden
+		lineageTag: b3c3f7f7-cd76-45fc-b2b8-a7f583cd8f34
+		sourceColumn: sensor_name
+
+	column n
+		dataType: int64
+		formatString: #,0
+		lineageTag: 1d87850b-fa26-4e01-9d84-e1a8ec98b091
+		sourceColumn: n
+
+	column avg_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: 36253af0-eb99-4ab1-aea5-afba4a9e8418
+		sourceColumn: avg_value
+
+	column min_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: cfee8230-bf87-44f9-9f08-14d31f6106f3
+		sourceColumn: min_value
+
+	column max_value
+		dataType: double
+		formatString: 0.00
+		lineageTag: 4cda3f39-928e-4eb8-899c-401b7727ab26
+		sourceColumn: max_value
+
+	partition Stats_Partition = m
+		mode: import
+		source =
+				let
+				    base = "http://localhost:8000",
+				    ids = List.Transform(Json.Document(Web.Contents(base, [RelativePath = "sessions"])), each [session_id]),
+				    fetch = (id as text) => Table.FromRecords(Json.Document(Web.Contents(base, [RelativePath = "stats", Query = [session_id = id]])), {"session_id", "sensor_name", "n", "avg_value", "min_value", "max_value"}, MissingField.UseNull),
+				    combined = Table.Combine(List.Transform(ids, fetch)),
+				    keyed = Table.AddColumn(combined, "channel_key", each [session_id] & "|" & [sensor_name], type text),
+				    typed = Table.TransformColumnTypes(keyed, {{"session_id", type text}, {"sensor_name", type text}, {"n", Int64.Type}, {"avg_value", type number}, {"min_value", type number}, {"max_value", type number}, {"channel_key", type text}})
+				in
+				    typed

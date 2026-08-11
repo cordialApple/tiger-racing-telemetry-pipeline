@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "a0000000000000000101",
+  "position": {
+    "x": 16,
+    "y": 16,
+    "z": 100,
+    "width": 300,
+    "height": 104
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Readings"
+                    }
+                  },
+                  "Property": "Min Oil P at 8k (bar)"
+                }
+              },
+              "queryRef": "Readings.Min Oil P at 8k (bar)",
+              "nativeQueryRef": "Min Oil P at 8k (bar)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
