@@ -61,10 +61,12 @@ class FakeParser:
         return ParsedSession(meta, {"ECU RPM": "rpm"}, readings, path.stem, 1)
 
 
-def make_pipeline(tmp_path, repo, parser):
+def make_pipeline(tmp_path, repo, parser, archive=True):
     raw = tmp_path / "raw"
     raw.mkdir()
-    return Pipeline(FakeDb(), raw, tmp_path / "processed", parser, FakeValidator(), repo, [])
+    return Pipeline(
+        FakeDb(), raw, tmp_path / "processed", parser, FakeValidator(), repo, [], archive
+    )
 
 
 def test_loads_and_moves_file(tmp_path):
@@ -79,6 +81,18 @@ def test_loads_and_moves_file(tmp_path):
     assert repo.upserts == 1
     assert not (pipe.source_dir / "1.csv").exists()
     assert (pipe.processed_dir / "1.csv").exists()
+
+
+def test_leaves_source_in_place_when_archiving_is_off(tmp_path):
+    repo = FakeRepo(loaded=False)
+    pipe = make_pipeline(tmp_path, repo, FakeParser(), archive=False)
+    (pipe.source_dir / "1.csv").write_text("x")
+
+    result = pipe.run()[0]
+
+    assert result.status == "loaded"
+    assert (pipe.source_dir / "1.csv").exists()
+    assert not pipe.processed_dir.exists()
 
 
 def test_skips_when_already_loaded(tmp_path):

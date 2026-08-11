@@ -26,7 +26,7 @@ def build_pipeline(db):
     return Pipeline(
         db, config.RAW_DIR, config.PROCESSED_DIR,
         default_registry(), SensorValidator(specs),
-        ReadingRepository(), specs,
+        ReadingRepository(), specs, config.ARCHIVE_PROCESSED,
     )
 
 

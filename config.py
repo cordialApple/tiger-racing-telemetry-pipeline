@@ -8,6 +8,9 @@ PROFILES_DIR = ROOT / "profiles"
 REPORTS_DIR = ROOT / "reports"
 DOCS_DIR = ROOT / "docs"
 
+# data/raw is a committed corpus now, so archiving would delete tracked files on every ingest
+ARCHIVE_PROCESSED = os.environ.get("ARCHIVE_PROCESSED", "0") == "1"
+
 API_HOST = os.environ.get("API_HOST", "0.0.0.0")
 API_PORT = int(os.environ.get("API_PORT", "8000"))
 

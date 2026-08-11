@@ -109,6 +109,10 @@ so re-running skips files already loaded.
 A file that fails to parse or load is reported and left in `data/raw` for retry,
 and the rest of the batch continues.
 
+`data/raw` is a committed corpus, so ingest leaves it alone; the content hash
+already prevents double-loading. Set `ARCHIVE_PROCESSED=1` to restore the old
+behaviour of moving loaded files into `data/processed/`.
+
 ## Data Model
 
 - `sessions`: one row per logger file, carrying `platform` and `event`.

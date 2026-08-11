@@ -13,7 +13,7 @@ class FileResult:
 
 
 class Pipeline:
-    def __init__(self, db, source_dir, processed_dir, parser, validator, repo, specs):
+    def __init__(self, db, source_dir, processed_dir, parser, validator, repo, specs, archive=True):
         self.db = db
         self.source_dir = Path(source_dir)
         self.processed_dir = Path(processed_dir)
@@ -21,6 +21,7 @@ class Pipeline:
         self.validator = validator
         self.repo = repo
         self.specs = specs
+        self.archive = archive
 
     def run(self) -> list[FileResult]:
         with self.db.connection() as conn:
@@ -53,6 +54,8 @@ class Pipeline:
         return FileResult(source_path, "loaded", written, report.out_of_range)
 
     def _archive(self, path: Path):
+        if not self.archive:
+            return
         target = self.processed_dir / path.relative_to(self.source_dir)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.move(str(path), str(target))
