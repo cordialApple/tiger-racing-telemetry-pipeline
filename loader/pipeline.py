@@ -28,25 +28,29 @@ class Pipeline:
         return [self.process(p) for p in sorted(self.source_dir.rglob("*.csv"))]
 
     def process(self, path: Path) -> FileResult:
+        source_path = path.relative_to(self.source_dir).as_posix()
         try:
-            return self._load(path)
+            return self._load(path, source_path)
         except Exception as e:
-            return FileResult(path.name, "error", error=str(e))
+            return FileResult(source_path, "error", error=str(e))
 
-    def _load(self, path: Path) -> FileResult:
+    def _load(self, path: Path, source_path: str) -> FileResult:
         parsed = self.parser.parse(path)
         with self.db.connection() as conn:
             if self.repo.is_loaded(conn, parsed.packet_id):
-                return FileResult(parsed.session.source_file, "skipped")
+                # same bytes filed under another path still deserve attribution
+                self.repo.record_source(conn, parsed.packet_id, source_path)
+                return FileResult(source_path, "skipped")
             report = self.validator.validate(parsed.readings)
             self.repo.insert_session(conn, parsed.session)
             written = self.repo.copy_readings(conn, parsed.session.session_id, parsed.readings)
             self.repo.log_ingestion(
                 conn, parsed.packet_id, parsed.session.session_id,
-                parsed.session.source_file, parsed.row_count, written,
+                source_path, parsed.row_count, written,
             )
+            self.repo.record_source(conn, parsed.packet_id, source_path)
         self._archive(path)
-        return FileResult(parsed.session.source_file, "loaded", written, report.out_of_range)
+        return FileResult(source_path, "loaded", written, report.out_of_range)
 
     def _archive(self, path: Path):
         target = self.processed_dir / path.relative_to(self.source_dir)

@@ -1,5 +1,7 @@
+DROP VIEW IF EXISTS v_session_channels CASCADE;
+
 CREATE OR REPLACE VIEW v_session_channels AS
-SELECT st.session_id, st.sensor_name, sn.description, sn.unit,
+SELECT st.session_id, st.sensor_name, sn.platform, sn.description, sn.unit,
        sn.data_type, sn.min_range, sn.max_range,
        st.n, st.avg_value, st.min_value, st.max_value,
        NOT (st.min_value = 0 AND st.max_value = 0) AS has_signal

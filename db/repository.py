@@ -1,9 +1,10 @@
 from parser.models import SensorSpec, SessionMeta
 
 _UPSERT_SENSORS = """
-INSERT INTO sensors (sensor_name, description, unit, data_type, min_range, max_range)
-VALUES (%s, %s, %s, %s, %s, %s)
+INSERT INTO sensors (sensor_name, platform, description, unit, data_type, min_range, max_range)
+VALUES (%s, %s, %s, %s, %s, %s, %s)
 ON CONFLICT (sensor_name) DO UPDATE SET
+    platform = EXCLUDED.platform,
     description = EXCLUDED.description,
     unit = EXCLUDED.unit,
     data_type = EXCLUDED.data_type,
@@ -12,16 +13,22 @@ ON CONFLICT (sensor_name) DO UPDATE SET
 """
 
 _INSERT_SESSION = """
-INSERT INTO sessions (session_id, source_file, vehicle, racer, championship,
-                      session_name, comment, started_at, sample_rate_hz,
-                      duration_s, segment_times)
-VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+INSERT INTO sessions (session_id, source_file, platform, event, vehicle, racer,
+                      championship, session_name, comment, started_at,
+                      sample_rate_hz, duration_s, segment_times)
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
 ON CONFLICT (session_id) DO NOTHING
 """
 
 _INSERT_INGESTION = """
 INSERT INTO ingestion_log (packet_id, session_id, source_file, row_count, reading_count)
 VALUES (%s, %s, %s, %s, %s)
+"""
+
+_INSERT_SOURCE = """
+INSERT INTO ingestion_source (packet_id, source_path)
+VALUES (%s, %s)
+ON CONFLICT (packet_id, source_path) DO NOTHING
 """
 
 
@@ -34,7 +41,7 @@ class ReadingRepository:
 
     def upsert_sensors(self, conn, specs: list[SensorSpec]):
         rows = [
-            (s.name, s.description, s.unit, s.data_type, s.min_range, s.max_range)
+            (s.name, s.platform, s.description, s.unit, s.data_type, s.min_range, s.max_range)
             for s in specs
         ]
         with conn.cursor() as cur:
@@ -42,9 +49,10 @@ class ReadingRepository:
 
     def insert_session(self, conn, meta: SessionMeta):
         conn.execute(_INSERT_SESSION, (
-            meta.session_id, meta.source_file, meta.vehicle, meta.racer,
-            meta.championship, meta.session_name, meta.comment, meta.started_at,
-            meta.sample_rate_hz, meta.duration_s, meta.segment_times,
+            meta.session_id, meta.source_file, meta.platform, meta.event,
+            meta.vehicle, meta.racer, meta.championship, meta.session_name,
+            meta.comment, meta.started_at, meta.sample_rate_hz, meta.duration_s,
+            meta.segment_times,
         ))
 
     def copy_readings(self, conn, session_id, readings) -> int:
@@ -62,3 +70,6 @@ class ReadingRepository:
             _INSERT_INGESTION,
             (packet_id, session_id, source_file, row_count, reading_count),
         )
+
+    def record_source(self, conn, packet_id, source_path):
+        conn.execute(_INSERT_SOURCE, (packet_id, source_path))

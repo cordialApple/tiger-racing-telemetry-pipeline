@@ -7,7 +7,6 @@ PROCESSED_DIR = ROOT / "data" / "processed"
 PROFILES_DIR = ROOT / "profiles"
 REPORTS_DIR = ROOT / "reports"
 DOCS_DIR = ROOT / "docs"
-SPECS_PATH = ROOT / "docs" / "sensorspecs.md"
 
 API_HOST = os.environ.get("API_HOST", "0.0.0.0")
 API_PORT = int(os.environ.get("API_PORT", "8000"))

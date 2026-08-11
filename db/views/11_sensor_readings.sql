@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS v_sensor_readings CASCADE;
+
 CREATE OR REPLACE VIEW v_sensor_readings AS
 SELECT r.session_id, r.sensor_name, sn.unit, r.ts,
        EXTRACT(EPOCH FROM (r.ts - s.started_at)) AS t_seconds,

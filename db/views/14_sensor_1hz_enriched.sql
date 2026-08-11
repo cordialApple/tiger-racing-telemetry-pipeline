@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS v_sensor_1hz_enriched CASCADE;
+
 CREATE OR REPLACE VIEW v_sensor_1hz_enriched AS
 SELECT a.session_id, a.sensor_name, sn.unit, a.bucket AS ts,
        EXTRACT(EPOCH FROM (a.bucket - s.started_at)) AS t_seconds,

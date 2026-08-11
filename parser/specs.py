@@ -1,7 +1,10 @@
+import re
 from pathlib import Path
 
 import config
 from parser.models import SensorSpec
+
+_PLATFORM = re.compile(r"^sensorspecs-(?P<platform>.+)\.md$")
 
 
 class SpecLoader:
@@ -11,6 +14,7 @@ class SpecLoader:
     def load(self) -> list[SensorSpec]:
         specs = []
         for path in self.paths:
+            platform = self._platform(path)
             for cells in self._table_rows(path):
                 name, description, data_type, unit, min_range, max_range = cells[:6]
                 specs.append(SensorSpec(
@@ -20,8 +24,14 @@ class SpecLoader:
                     data_type=data_type,
                     min_range=self._to_float(min_range),
                     max_range=self._to_float(max_range),
+                    platform=platform,
                 ))
         return specs
+
+    @staticmethod
+    def _platform(path: Path) -> str | None:
+        match = _PLATFORM.match(path.name)
+        return match["platform"] if match else None
 
     @staticmethod
     def _resolve(paths) -> list[Path]:

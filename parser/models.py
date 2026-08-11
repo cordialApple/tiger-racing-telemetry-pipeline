@@ -10,6 +10,7 @@ class SensorSpec:
     data_type: str
     min_range: float | None
     max_range: float | None
+    platform: str | None = None
 
 
 @dataclass(frozen=True)

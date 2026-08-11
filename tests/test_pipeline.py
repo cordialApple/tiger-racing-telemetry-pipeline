@@ -17,6 +17,7 @@ class FakeRepo:
         self.loaded = loaded
         self.upserts = 0
         self.logged = []
+        self.sources = []
 
     def is_loaded(self, conn, packet_id):
         return self.loaded
@@ -32,6 +33,9 @@ class FakeRepo:
 
     def log_ingestion(self, conn, *args):
         self.logged.append(args)
+
+    def record_source(self, conn, packet_id, source_path):
+        self.sources.append((packet_id, source_path))
 
 
 class FakeValidator:
@@ -87,6 +91,7 @@ def test_skips_when_already_loaded(tmp_path):
     assert result.status == "skipped"
     assert (pipe.source_dir / "1.csv").exists()
     assert repo.logged == []
+    assert repo.sources == [("1", "1.csv")]
 
 
 def test_discovers_nested_files_and_mirrors_layout(tmp_path):
@@ -97,8 +102,11 @@ def test_discovers_nested_files_and_mirrors_layout(tmp_path):
     (nested / "20.02.21.csv").write_text("x")
 
     result = pipe.run()[0]
+    rel = "2026/Drive Day 7_18/Tristan Drive/20.02.21.csv"
 
     assert result.status == "loaded"
+    assert result.source_file == rel
+    assert repo.sources == [("20.02.21", rel)]
     assert not (nested / "20.02.21.csv").exists()
     assert (pipe.processed_dir / "2026" / "Drive Day 7_18" / "Tristan Drive" / "20.02.21.csv").exists()
 
