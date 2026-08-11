@@ -22,11 +22,11 @@
                       "Entity": "Readings"
                     }
                   },
-                  "Property": "SOC Drop %"
+                  "Property": "Median Flowrate"
                 }
               },
-              "queryRef": "Readings.SOC Drop %",
-              "nativeQueryRef": "SOC Drop %"
+              "queryRef": "Readings.Median Flowrate",
+              "nativeQueryRef": "Median Flowrate"
             }
           ]
         }

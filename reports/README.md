@@ -19,9 +19,17 @@ one event. The figures below are reproducible from the model's measures.
 This is the shape of the evening: 18 sessions, 33.7 min of total logged time, a
 15K max RPM, and 1.86 g peak lateral. The per-session bars show how uneven the
 runs were. Eight are 10–26 s aborted starts and restarts (note the three inside
-two minutes around 20:16), while only a handful are full runs. Channel health
+two minutes around 15:16), while only a handful are full runs. Channel health
 sits flat at ~39% for every session (see Findings for why), and peak
 lateral/braking G track together on the real runs, which is the balance you want.
+
+### Session Deep-Dive
+
+![Session Deep-Dive](session-deep-dive.png)
+
+Session and sensor slicers driving a 1 Hz trace with a min/max envelope, plus a
+channel summary table. This is the page for asking "what did channel X do in
+session Y", and it is the only 2023 page that is not a fixed set of measures.
 
 ### Engine Health
 
@@ -75,8 +83,6 @@ used here, which is a good next refinement.
 21 unique sessions across four drivers (Emiliano 7, Tristan 7, Ryan 4, Yianni 2,
 plus one unattributed shakedown), 19.8 min logged at 10 Hz. Five files are the
 same run filed under two drivers; `ingestion_source` keeps both attributions.
-Screenshots for the three EV pages are pending an export from Power BI Desktop.
-
 Hardware identified from the channel names: a **DTI HV-500 family inverter**
 (the signal names `Actual_FOC_id`, `Actual_FOC_iq`, `Actual_Brake` are verbatim
 from DTI's published CAN map, and its firmware is VESC-derived) driving a
@@ -89,7 +95,10 @@ liquid-cooled motor, with an **Orion BMS 2** on the accumulator.
    99.3%. It rises monotonically 32 to 41 across the day while the car
    discharges 1.36 kWh. It is a pack temperature in Celsius, and the BMS SOC
    message is mis-mapped in the logger config. **Every SOC number in this drop
-   is unusable**, including the "SOC Drop %" card.
+   is unusable.** The `SOC Drop %` measure is now hidden and renamed
+   `SOC Drop % (INVALID)`, and the EV Drive Day card that used it has been
+   replaced with `Median Flowrate`. The screenshot below predates that swap and
+   still shows the old card.
 2. **`Fault Code` is mostly not a fault.** It takes three values: 0, 2 and 4.
    Code 2 is DTI "Undervoltage", which is what the inverter reports when it is
    awake on low voltage and the tractive system is not energized. Conditioning
@@ -112,6 +121,8 @@ TSB Temp 64, Stop Logging 128), verified on **11,913 of 11,913 rows**. The
 value 160 is Logging + Stop Logging, the idle paddock state, not an alarm.
 
 ### EV Drive Day
+
+![EV Drive Day](ev-drive-day.png)
 
 **The headline track time is inflated.** Of 19.8 min logged, the tractive system
 is live for 15.6 min and the motor actually turns for **11.7 min (59%)**. Four
@@ -162,6 +173,8 @@ whether this matters.
 
 ### EV Thermal
 
+![EV Thermal](ev-thermal.png)
+
 Absolute temperatures are comfortable. Motor peaks **61.9 C** against Emrax's
 120 C winding limit and AMK's 125 C derate onset; controller peaks **68.9 C**;
 pack peaks **41 C** against the hard **60 C** ceiling in FSAE **EV.7.5.2**.
@@ -197,6 +210,8 @@ get when almost nothing is flowing. Delta-T alone cannot diagnose a loop, since
 it equals heat load divided by mass flow.
 
 ### EV Findings
+
+![EV Findings](ev-findings.png)
 
 1. **Peak temperature is set by heat soak, not by driving.** Controlling for run
    duration, the correlation between a run's starting motor temperature and its

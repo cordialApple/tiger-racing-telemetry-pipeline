@@ -185,8 +185,9 @@ table Readings
 		displayFolder: EV Power
 		lineageTag: 0000006d-e026-4000-8000-00000000006d
 
-	/// State of charge consumed across the session.
-	measure 'SOC Drop %' = [Max Pack SOC %] - [Min Pack SOC %]
+	/// Not state of charge. Pack_SOC is byte-identical to TSB HighTemp, a pack temperature.
+	measure 'SOC Drop % (INVALID)' = [Max Pack SOC %] - [Min Pack SOC %]
+		isHidden
 		formatString: 0
 		displayFolder: EV Power
 		lineageTag: 0000006e-e026-4000-8000-00000000006e

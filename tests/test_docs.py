@@ -49,7 +49,11 @@ def test_readme_hero_image_exists():
     assert (config.ROOT / heroes[0]).is_file()
 
 
-@pytest.mark.parametrize("slug", ["season-overview", "engine-health", "findings"])
+@pytest.mark.parametrize(
+    "slug",
+    ["season-overview", "session-deep-dive", "engine-health", "findings",
+     "ev-drive-day", "ev-thermal", "ev-findings"],
+)
 def test_screenshot_is_referenced_by_the_reports_readme(slug):
     text = (config.ROOT / "reports" / "README.md").read_text(encoding="utf-8")
     assert f"({slug}.png)" in text
@@ -59,3 +63,9 @@ def test_report_pages_cover_both_platforms():
     names = page_names()
     assert len(names) == 7
     assert len([n for n in names if n.startswith("EV ")]) == 3
+
+
+def test_every_report_page_has_a_screenshot():
+    slugs = {p.stem for p in (config.ROOT / "reports").glob("*.png")}
+    expected = {name.lower().replace(" ", "-") for name in page_names()}
+    assert expected <= slugs, f"pages without a screenshot: {sorted(expected - slugs)}"

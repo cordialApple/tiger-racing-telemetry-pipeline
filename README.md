@@ -8,7 +8,7 @@
 [![Power BI](https://img.shields.io/badge/Power%20BI-dashboard-f2c811.svg)](https://powerbi.microsoft.com)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-![Season Overview](reports/season-overview.png)
+![EV Drive Day](reports/ev-drive-day.png)
 
 ## What it is
 
