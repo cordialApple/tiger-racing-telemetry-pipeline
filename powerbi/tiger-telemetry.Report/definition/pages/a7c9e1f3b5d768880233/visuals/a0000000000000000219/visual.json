@@ -83,7 +83,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Flowrate sensor is unusable: max per session against a 0 to 40 spec'"
+                  "Value": "'Flowrate spikes are inverter EMI: 1.26% of samples exceed the 0 to 40 range'"
                 }
               }
             }

@@ -83,7 +83,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Motor temp over run time (s): longer runs keep climbing'"
+                  "Value": "'Motor temp over run time (s): each run starts where the last ended'"
                 }
               }
             }

@@ -134,4 +134,17 @@ def test_visual_names_are_unique_across_the_report():
 def test_session_sort_key_does_not_assume_numeric_ids():
     text = tmdl("Sessions")
     assert "VALUE(Sessions[session_id])" not in text
-    assert "column session_no = INT(Sessions[started_at] * 86400)" in text
+    assert "column session_no = INT(Sessions[started_at_local] * 86400)" in text
+
+
+def test_session_labels_use_event_local_time():
+    text = tmdl("Sessions")
+    assert 'FORMAT(Sessions[started_at_local], "MMM d HH:mm")' in text
+    assert "started_at_local" in SessionCatalog.model_fields
+
+
+def test_ev_measures_are_platform_scoped():
+    text = tmdl("Channels")
+    for measure in ("EV Dead Channels", "EV Channel Rows", "EV Channel Count"):
+        body = text.split(f"measure '{measure}'", 1)[1].split("displayFolder", 1)[0]
+        assert 'Channels[platform] = "ev-2026"' in body, measure

@@ -28,7 +28,7 @@ SQL views to Power BI. The dashboard above is the payoff.
 - **TimescaleDB hypertable.** Long-format `(ts, session_id, sensor_name, value)` with a 1 Hz continuous aggregate.
 - **Typed REST API.** FastAPI endpoints with fixed, Pydantic-validated column sets for Power BI.
 - **Per-file error isolation.** One bad session fails alone; the rest of the batch loads.
-- **Findings that matter.** 2023 surfaced oil starvation under cornering, cooling limits, dead channels, and low throttle usage. 2026 surfaced a controller fault code live for 22% of the drive day and an out-of-range flowrate sensor. See [`reports/`](reports/README.md).
+- **Findings that matter.** 2023 surfaced oil starvation under cornering, cooling limits, dead channels, and low throttle usage. 2026 surfaced coolant flow at ~40% of the inverter minimum, peak temperature driven by heat soak rather than driving, inverter overcurrent trips, and a BMS channel labelled `Pack_SOC` that is really a pack temperature. See [`reports/`](reports/README.md).
 
 ## Architecture
 

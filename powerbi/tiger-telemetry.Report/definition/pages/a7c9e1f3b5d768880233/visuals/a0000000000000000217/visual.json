@@ -22,11 +22,11 @@
                       "Entity": "Readings"
                     }
                   },
-                  "Property": "Fault Seconds"
+                  "Property": "Overcurrent Trip Seconds"
                 }
               },
-              "queryRef": "Readings.Fault Seconds",
-              "nativeQueryRef": "Fault Seconds"
+              "queryRef": "Readings.Overcurrent Trip Seconds",
+              "nativeQueryRef": "Overcurrent Trip Seconds"
             }
           ]
         }

@@ -148,7 +148,7 @@ table Readings
 		displayFolder: EV Drivetrain
 		lineageTag: 00000066-e026-4000-8000-000000000066
 
-	/// 1 Hz buckets where motor speed went negative.
+	/// Motor speed negative. Some of this is reverse rotation, not recovered energy.
 	measure 'Regen Seconds' = CALCULATE(COUNTROWS(Readings), Sensors[sensor_name] = "Motor RPM", Readings[min_value] < 0)
 		formatString: #,0
 		displayFolder: EV Drivetrain
@@ -237,6 +237,22 @@ table Readings
 		displayFolder: EV Thermal
 		lineageTag: 00000077-e026-4000-8000-000000000077
 
+	/// Median rejects the 1.26% of samples that are inverter EMI spikes, unlike MAX.
+	measure 'Median Flowrate' = MEDIANX(CALCULATETABLE(Readings, Sensors[sensor_name] = "Flowrate"), Readings[avg_value])
+		formatString: 0.0
+		displayFolder: EV Cooling
+		lineageTag: 00000130-e026-4000-8000-000000000130
+
+	/// Share of flowrate samples above the sensor's 40 L/min physical range.
+	measure 'Flowrate Spike %' = ```
+			VAR All = CALCULATE(COUNTROWS(Readings), Sensors[sensor_name] = "Flowrate")
+			VAR Spikes = CALCULATE(COUNTROWS(Readings), Sensors[sensor_name] = "Flowrate", Readings[max_value] > 40)
+			RETURN DIVIDE(Spikes, All)
+			```
+		formatString: 0.00%
+		displayFolder: EV Cooling
+		lineageTag: 00000131-e026-4000-8000-000000000131
+
 	measure 'Max Flowrate' = CALCULATE(MAX(Readings[max_value]), Sensors[sensor_name] = "Flowrate")
 		formatString: #,0
 		displayFolder: EV Cooling
@@ -247,8 +263,8 @@ table Readings
 		displayFolder: EV Cooling
 		lineageTag: 00000079-e026-4000-8000-000000000079
 
-	/// 1 Hz buckets reporting a non-zero motor controller fault code.
-	measure 'Fault Seconds' = CALCULATE(COUNTROWS(Readings), Sensors[sensor_name] = "Fault Code", Readings[max_value] > 0)
+	/// DTI code 4 only. Code 2 is 'undervoltage', which just means the tractive system is off.
+	measure 'Overcurrent Trip Seconds' = CALCULATE(COUNTROWS(Readings), Sensors[sensor_name] = "Fault Code", Readings[max_value] = 4)
 		formatString: #,0
 		displayFolder: EV Health
 		lineageTag: 0000007a-e026-4000-8000-00000000007a

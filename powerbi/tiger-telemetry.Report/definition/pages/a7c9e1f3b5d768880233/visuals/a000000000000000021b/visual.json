@@ -41,10 +41,10 @@
                       "Entity": "Channels"
                     }
                   },
-                  "Property": "Channel Count"
+                  "Property": "EV Channel Rows"
                 }
               },
-              "queryRef": "Channels.Channel Count",
+              "queryRef": "Channels.EV Channel Rows",
               "nativeQueryRef": "Channel Count"
             }
           ]
@@ -65,7 +65,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Channels: live (True) vs flat (False)'"
+                  "Value": "'EV channels: live (True) vs flat (False)'"
                 }
               }
             }

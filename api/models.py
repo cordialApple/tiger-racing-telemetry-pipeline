@@ -14,6 +14,7 @@ class SessionCatalog(BaseModel):
     session_name: str | None
     comment: str | None
     started_at: datetime
+    started_at_local: datetime
     duration_s: int | None
     sample_rate_hz: int
     reading_count: int | None

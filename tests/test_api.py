@@ -8,12 +8,14 @@ CATALOG = [
     {"session_id": "s1", "source_file": "2023/1.csv", "platform": "ice-2023",
      "event": None, "vehicle": "TR23", "racer": "A", "championship": None,
      "session_name": None, "comment": None,
-     "started_at": "2023-01-01T00:00:00", "duration_s": None, "sample_rate_hz": 20,
+     "started_at": "2023-01-01T00:00:00",
+     "started_at_local": "2022-12-31T18:00:00", "duration_s": None, "sample_rate_hz": 20,
      "reading_count": None, "loaded_at": None},
     {"session_id": "s2", "source_file": "2026/Ryan Drive/2.csv", "platform": "ev-2026",
      "event": "Drive Day 7_18", "vehicle": None, "racer": "Ryan", "championship": None,
      "session_name": None, "comment": "Weird FlowRate",
-     "started_at": "2026-07-18T00:00:00", "duration_s": None, "sample_rate_hz": 10,
+     "started_at": "2026-07-18T00:00:00",
+     "started_at_local": "2026-07-17T19:00:00", "duration_s": None, "sample_rate_hz": 10,
      "reading_count": None, "loaded_at": None},
 ]
 

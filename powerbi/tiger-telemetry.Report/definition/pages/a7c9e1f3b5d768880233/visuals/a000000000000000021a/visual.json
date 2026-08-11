@@ -83,7 +83,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Harder runs, hotter controller: peak DC current vs max MC temp'"
+                  "Value": "'Peak DC current vs max MC temp: no relationship (r=-0.03, p=0.92)'"
                 }
               }
             }

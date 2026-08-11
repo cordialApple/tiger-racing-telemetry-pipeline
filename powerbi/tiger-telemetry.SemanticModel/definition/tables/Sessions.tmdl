@@ -88,6 +88,11 @@ table Sessions
 		lineageTag: 6215f5dc-ba15-45e4-b27a-99b768e66b0e
 		sourceColumn: started_at
 
+	column started_at_local
+		dataType: dateTime
+		lineageTag: 3f7c1a92-6d84-4e51-9b23-7a0c5ef41d68
+		sourceColumn: started_at_local
+
 	column duration_s
 		dataType: int64
 		formatString: #,0
@@ -105,13 +110,13 @@ table Sessions
 		lineageTag: bd3d1408-25dd-4cfc-b0d6-654c84ee25c9
 		sourceColumn: reading_count
 
-	/// Chronological sort key; session_id is only numeric on the 2023 car.
-	column session_no = INT(Sessions[started_at] * 86400)
+	/// Chronological sort key on event-local time; session_id is only numeric on the 2023 car.
+	column session_no = INT(Sessions[started_at_local] * 86400)
 		isHidden
 		lineageTag: 062d0a65-5d62-4c3a-9f46-47494488e4a9
 
 	/// Logger session names are mostly 'NO GPS', so label by start time and driver.
-	column 'Session Label' = FORMAT(Sessions[started_at], "MMM d HH:mm") & " · " & COALESCE(Sessions[racer], Sessions[session_id])
+	column 'Session Label' = FORMAT(Sessions[started_at_local], "MMM d HH:mm") & " · " & COALESCE(Sessions[racer], Sessions[session_id])
 		lineageTag: 8c31f89c-7834-43fb-81b6-fca555fcbc1e
 		sortByColumn: session_no
 
@@ -121,8 +126,8 @@ table Sessions
 				let
 				    base = "http://localhost:8000",
 				    raw = Json.Document(Web.Contents(base, [RelativePath = "sessions"])),
-				    tbl = Table.FromRecords(raw, {"session_id", "source_file", "platform", "event", "vehicle", "racer", "championship", "session_name", "comment", "started_at", "duration_s", "sample_rate_hz", "reading_count"}, MissingField.UseNull),
-				    typed = Table.TransformColumnTypes(tbl, {{"session_id", type text}, {"source_file", type text}, {"platform", type text}, {"event", type text}, {"vehicle", type text}, {"racer", type text}, {"championship", type text}, {"session_name", type text}, {"comment", type text}, {"started_at", type datetimezone}, {"duration_s", Int64.Type}, {"sample_rate_hz", Int64.Type}, {"reading_count", Int64.Type}}),
+				    tbl = Table.FromRecords(raw, {"session_id", "source_file", "platform", "event", "vehicle", "racer", "championship", "session_name", "comment", "started_at", "started_at_local", "duration_s", "sample_rate_hz", "reading_count"}, MissingField.UseNull),
+				    typed = Table.TransformColumnTypes(tbl, {{"session_id", type text}, {"source_file", type text}, {"platform", type text}, {"event", type text}, {"vehicle", type text}, {"racer", type text}, {"championship", type text}, {"session_name", type text}, {"comment", type text}, {"started_at", type datetimezone}, {"started_at_local", type datetime}, {"duration_s", Int64.Type}, {"sample_rate_hz", Int64.Type}, {"reading_count", Int64.Type}}),
 				    final = Table.TransformColumns(typed, {{"started_at", DateTimeZone.RemoveZone, type datetime}})
 				in
 				    final
