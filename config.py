@@ -19,3 +19,6 @@ DB_USER = os.environ.get("PGUSER", "fsae")
 DB_PASSWORD = os.environ.get("PGPASSWORD", "fsae2023")
 DB_HOST = os.environ.get("PGHOST", "localhost")
 DB_PORT = int(os.environ.get("PGPORT", "5432"))
+
+# db tests delete rows, so they must never point at the database a developer is using
+TEST_DB_NAME = os.environ.get("PGDATABASE_TEST", f"{DB_NAME}_test")

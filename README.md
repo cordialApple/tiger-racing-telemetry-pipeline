@@ -180,6 +180,10 @@ Tests that need a database are marked `db` automatically: `conftest.py` tags any
 test reaching for the `database` or `loaded_db` fixture, so the marker cannot
 drift from reality. They skip when no TimescaleDB is reachable.
 
+Those tests delete rows, so they run against their own database, `<PGDATABASE>_test`
+(override with `PGDATABASE_TEST`), created on first use. Running `pytest` never
+touches the database you ingest into.
+
 CI (`.github/workflows/tests.yml`) runs three jobs:
 
 - `lint`: `ruff check`.

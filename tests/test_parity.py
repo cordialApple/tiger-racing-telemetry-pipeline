@@ -54,7 +54,10 @@ def loaded_db(database):
         n = repo.copy_readings(conn, parsed.session.session_id, parsed.readings)
         repo.log_ingestion(conn, parsed.packet_id, "1", "2023/1.csv", parsed.row_count, n)
     sm.refresh_views()
+    # app.db is module-level, so point it at the test database or the API reads the dev one
+    original, app.db = app.db, database
     yield database
+    app.db = original
     with database.connection() as conn:
         _purge(conn)
 
