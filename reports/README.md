@@ -80,216 +80,165 @@ used here, which is a good next refinement.
 
 ## 2026, drive day, Jul 18
 
-21 unique sessions across four drivers (Emiliano 7, Tristan 7, Ryan 4, Yianni 2,
-plus one unattributed shakedown), 19.8 min logged at 10 Hz. Five files are the
-same run filed under two drivers; `ingestion_source` keeps both attributions.
-Hardware identified from the channel names: a **DTI HV-500 family inverter**
-(the signal names `Actual_FOC_id`, `Actual_FOC_iq`, `Actual_Brake` are verbatim
-from DTI's published CAN map, and its firmware is VESC-derived) driving a
-liquid-cooled motor, with an **Orion BMS 2** on the accumulator.
+21 unique sessions, four drivers, 19.8 min at 10 Hz. The car runs a **DTI HV-500
+family inverter** (VESC-derived firmware, its CAN signal names are verbatim in
+the log) and an **Orion BMS 2**.
 
-### Read this first: three channels do not mean what they are named
+The car is not hot. It is barely cooled. Coolant flow runs at 40% of the
+inverter's minimum, and a run's peak temperature is set by how hot the car
+already was, not by how it was driven.
 
-1. **`Pack_SOC` is not state of charge.** It is byte-identical to
-   `TSB HighTemp` in **100.00%** of samples and matches `Therm1_HighVal` in
-   99.3%. It rises monotonically 32 to 41 across the day while the car
-   discharges 1.36 kWh. It is a pack temperature in Celsius, and the BMS SOC
-   message is mis-mapped in the logger config. **Every SOC number in this drop
-   is unusable.** The `SOC Drop %` measure is now hidden and renamed
-   `SOC Drop % (INVALID)`, and the EV Drive Day card that used it has been
-   replaced with `Median Flowrate`. The screenshot below predates that swap and
-   still shows the old card.
-2. **`Fault Code` is mostly not a fault.** It takes three values: 0, 2 and 4.
-   Code 2 is DTI "Undervoltage", which is what the inverter reports when it is
-   awake on low voltage and the tractive system is not energized. Conditioning
-   on `Energized = 1 AND RTD = 1` collapses the fault rate from 22% of all
-   samples to **82 of 9,060 = 0.91%**.
-3. **`Motor RPM` may be electrical, not mechanical.** DTI broadcasts
-   `Actual_ERPM`, which is mechanical RPM times pole pairs. A torque
-   cross-check says the logged value behaves as mechanical (at 1:1 the implied
-   median torque is 63 Nm, plausible for this class; at 4 pole pairs it would be
-   252 Nm, which is not), but **confirm the divide against the logger config**
-   before quoting 3,326 RPM anywhere.
+### Three channels are lying
 
-Also identically zero for the whole drop, so no field-oriented-control analysis
-is possible: `Actual_FOC_id`, `Actual_FOC_iq`, `MC Throttle`, `Actual_Brake`,
-`ALARMS1`, `WATER T ALM`. DTI packet 0x23 is not being broadcast or not decoded.
+**`Pack_SOC` is not state of charge.** Byte-identical to `TSB HighTemp` in
+**100.00%** of samples, and it climbs 32 to 41 while the car discharges
+1.36 kWh. It is a pack temperature. Every SOC number in this drop is garbage;
+`SOC Drop %` is now hidden as `SOC Drop % (INVALID)`.
 
-`uFLAGS1` reconstructs exactly from the boolean channels as a bit-packed byte
-(RTD 1, Energized 2, LV Low 4, Motor Temp High 8, MC Temp High 16, Logging 32,
-TSB Temp 64, Stop Logging 128), verified on **11,913 of 11,913 rows**. The
-value 160 is Logging + Stop Logging, the idle paddock state, not an alarm.
+**`Fault Code` is mostly not a fault.** Values are 0, 2 and 4. Code 2 is DTI
+"Undervoltage", which is what the inverter says when the tractive system is off.
+Filter to `Energized = 1 AND RTD = 1` and the fault rate drops from 22% of all
+samples to **0.91%** (82 of 9,060).
+
+**`Motor RPM` needs verifying.** DTI broadcasts `Actual_ERPM`, mechanical RPM
+times pole pairs. At 1:1 the implied median torque is 63 Nm, right for this
+class; at 4 pole pairs it would be 252 Nm, impossible. So the logger already
+divided, but confirm against its config before quoting 3,326 RPM.
+
+**21 of 60 channels are flat all day.** `Actual_FOC_id`, `Actual_FOC_iq`,
+`MC Throttle`, `Actual_Brake`, `ALARMS1` and `WATER T ALM` are identically zero,
+so DTI packet 0x23 is not being decoded and field-oriented-control analysis is
+impossible. The inertial block exists in **1 of 26 files**, which is why the drop
+has two schemas and why there are no G traces. `uFLAGS1` already bit-packs all
+eight boolean channels, verified on 11,913 of 11,913 rows.
 
 ### EV Drive Day
 
 ![EV Drive Day](ev-drive-day.png)
 
-**The headline track time is inflated.** Of 19.8 min logged, the tractive system
-is live for 15.6 min and the motor actually turns for **11.7 min (59%)**. Four
-sessions have zero motor motion. Yianni's only two unique files are both
-stationary, so there is no driving data for that driver at all.
+21 sessions between 17:55 and 21:59, nearly all under a minute, with one
+3.8-minute run alone in the middle. Channel health steps from 28% to 65% at the
+fourth session: the tractive system coming alive, not the wiring improving.
 
-Peak load is real but the day was not fast: peak 37.8 kW against the FSAE
-**EV.3.3.1** 80 kW limit (53% headroom, 34.4 kW on a 500 ms rolling mean),
-mean 4.1 kW while moving, peak DC 129.5 A, peak AC 380.2 A. Median peak-AC to
-peak-DC ratio is 3.25.
+**Track time is inflated.** Of 19.8 min logged, the tractive system is live for
+15.6 min and the motor turns for **11.7 min**. Four sessions never move. Yianni's
+only two unique files are both stationary, so that driver has no data.
 
-**Duty cycle is clipping at the firmware ceiling.** 95.0% is the VESC
-`MCCONF_L_MAX_DUTY` default, set by the high-side bootstrap gate driver needing
-low-side on-time. 33 samples sit at exactly 94.9 or 95.0. At the top end the car
-is **voltage-limited, not current-limited**. More top speed needs field
-weakening or a higher pack voltage, not more current.
+**The day was not fast.** Peak 37.8 kW against the 80 kW limit (**EV.3.3.1**),
+mean 4.1 kW while moving, peak DC 129.5 A, peak AC 380.2 A at a 3.25 ratio.
 
-**Energy is the one metric short runs measure honestly**, because it is an
-integral. Total 1.362 kWh over 701 s of motor-turning, which scales to
-**116 Wh per 59.6 s endurance lap**. Real FSAE Electric 2026 Michigan teams ran
-129 to 266 Wh/lap, with 308 Wh/lap the cutoff for zero efficiency points
-(**D.13.4.5**). That looks efficient, but at 4.1 kW mean it mostly reflects
-gentle driving rather than an efficient car.
+**Duty cycle clips at 95.0%**, the VESC firmware ceiling. At the top end this car
+is voltage-limited, not current-limited: more speed needs field weakening or a
+higher pack voltage, not more current.
 
-**Regen is capped by the accumulator, not by the driver.** `Pack_DCL` (discharge
-limit) sits at 181 to 190 A while `Pack_CCL` (charge limit) sits at 11 to 13 A, a
-**15.8 to 1 asymmetry**, which is the normal lithium behaviour of accepting
-charge far more slowly than it delivers. At the median 320 V bus, a 13 A charge
-limit is **4.2 kW, about 11% of the 37.8 kW peak drive power**. And the BMS
-tightens it as the pack warms: `Pack_CCL` against pack temperature is
-**rho = -0.695, p < 1e-300**, falling from a mean of 12.8 A below 33 C to 11.7 A
-above 39 C. So chasing regen for efficiency points (**D.13.4.2**, full credit at
-FSAE; FSG **D 7.9.5** taxes it 10%) is a pack and BMS conversation, not a
-tuning one.
+**Energy is the one number short runs measure honestly**, because it is an
+integral. 1.362 kWh over 701 s of motor-turning scales to **116 Wh per 59.6 s
+endurance lap**, against 129 to 266 Wh/lap for real FSAE Electric 2026 teams and
+a 308 Wh/lap zero-points wall (**D.13.4.5**). That is not efficiency, it is
+gentle driving.
 
-Two related measurement problems. `DC Current` never goes negative (clamped at
-0), so the inverter's own DC channel cannot see regen at all. And
-`Pack_Current` reaches **-16.9 A against a 13 A charge limit**, a 30%
-overshoot: worth checking, because a cell pushed past its datasheet maximum for
-more than 500 ms obliges the AMS to open the shutdown circuit under FSAE
-**EV.7.3.5**.
-
-**One thing to confirm rather than a finding.** The 12 V rail runs 13.24 to
-14.82 V and exceeds 14.6 V on 11.2% of samples. That is unremarkable for
-lead-acid (Odyssey's hard ceiling is 15.0 V, never reached) but above the cell
-maximum for LiFePO4. Identify the low-voltage battery chemistry before deciding
-whether this matters.
+**Regen is capped by the pack, not the driver.** `Pack_DCL` sits at 181 to 190 A
+against `Pack_CCL` at 11 to 13 A, a **15.8 to 1** asymmetry that caps regen at
+**4.2 kW, 11% of peak drive power**, and the BMS tightens it as the pack warms
+(**rho = -0.695**). `Pack_Current` still reaches -16.9 A against a 13 A limit,
+and a cell past datasheet max for 500 ms opens the shutdown circuit
+(**EV.7.3.5**).
 
 ### EV Thermal
 
 ![EV Thermal](ev-thermal.png)
 
-Absolute temperatures are comfortable. Motor peaks **61.9 C** against Emrax's
-120 C winding limit and AMK's 125 C derate onset; controller peaks **68.9 C**;
-pack peaks **41 C** against the hard **60 C** ceiling in FSAE **EV.7.5.2**.
-Time-at-level is the honest view: the motor is at or above 55 C for 8.1% of
-moving samples and above 60 C for 0.5%.
+Drivetrain temps climb through the day and never come back down. Radiator inlet
+tracks outlet within a couple of degrees, so those bars sit on top of each other,
+and the flowrate chart looks empty because the median is 4 and the axis is scaled
+by a 4,132 spike.
 
-**Coolant inlet temperature is the number that is actually out of spec.**
-Radiator inlet runs a median of 50 C and peaks at 61 C against an ambient of
-about 23 C, so approach temperature is 27 to 38 K. That inlet exceeds Emrax's
-50 C maximum inlet on **50% of moving samples** and AMK's 40 C motor inlet spec
-on **100%**. Coolant inlet is the boundary condition every motor datasheet rates
-against.
+Absolute temperatures are fine. Motor peaks **61.9 C** against Emrax's 120 C
+limit, controller **68.9 C**, pack **41 C** against the 60 C ceiling in
+**EV.7.5.2**.
 
-**The flow is the problem, and the sensor is not.** Physics closes
-independently: 6.9 kW mean electrical at roughly 92% combined efficiency puts
-about 0.56 kW into the coolant; plain water (FSAE **T.5.5** forbids glycol)
-carries 68.6 W per L/min per K; at the observed 2 K median radiator delta that
-implies **4.1 L/min**. The sensor's median reading while the motor turns is
-**4.0 L/min**. It agrees with thermodynamics to within 2.5%.
+**Coolant inlet is the number that is out of spec.** Median 50 C, peak 61 C
+against 23 C ambient, an approach of 27 to 38 K. That exceeds Emrax's 50 C max
+inlet on **50%** of moving samples and AMK's 40 C motor inlet spec on **100%**.
+Inlet temperature is the boundary condition every motor datasheet rates against.
 
-That flow is far below spec. AMK requires 4 L/min per motor **and** 10 L/min for
-the inverter cold plate:
+**The flow is the problem and the sensor is not.** 6.9 kW mean electrical at 92%
+combined efficiency puts 0.56 kW into the coolant. Plain water (**T.5.5** forbids
+glycol) carries 68.6 W per L/min per K, so the observed 2 K delta needs
+**4.1 L/min**. The sensor reads a median of **4.0**. It agrees with
+thermodynamics to 2.5%.
+
+AMK requires 4 L/min per motor and 10 L/min for the inverter cold plate. This
+loop delivers:
 
 | | |
 |---|---|
 | median flow while the motor turns | **4.0 L/min** |
 | samples below 10 L/min | **96.2%** |
 | samples below 4 L/min | 29.0% |
-| samples reading exactly 0 while the motor turns | **13.9%** |
+| samples reading 0 while the motor turns | **13.9%** |
 
-The small radiator delta is not evidence of a healthy radiator. It is what you
-get when almost nothing is flowing. Delta-T alone cannot diagnose a loop, since
-it equals heat load divided by mass flow.
+The small radiator delta is not a healthy radiator. It is almost nothing
+flowing: delta-T equals heat load over mass flow, so it diagnoses nothing on its
+own.
 
 ### EV Findings
 
 ![EV Findings](ev-findings.png)
 
-1. **Peak temperature is set by heat soak, not by driving.** Controlling for run
-   duration, the correlation between a run's starting motor temperature and its
-   maximum is **partial r = +0.897, p < 0.0001** (N = 16). Mean within-run rise
-   is only **2.4 C**. Between-run cooling is **0.10 C per idle minute,
-   r-squared 0.09, p = 0.27**, statistically indistinguishable from zero: the car
-   does not shed heat while parked. *Action:* fix flow and airflow, and treat a
-   session block as one continuous thermal event rather than as separate runs.
-2. **Coolant flow is at roughly 40% of the inverter cold-plate minimum**, and
-   reads zero 13.9% of the time the motor is turning. *Action:* verify pump duty
-   and bleed the loop before touching anything else in the cooling system. The
-   pump, not the radiator core, is the first suspect.
-3. **The inverter is tripping on absolute overcurrent.** DTI fault code 4 is
-   "ABS. Overcurrent", AC current exceeding the configured absolute maximum. 79
-   samples across 7 sessions, and in **100%** of them AC current has collapsed to
-   0 A while the bus holds 319 V. That is a genuine torque cut which self-clears
-   in about 100 ms. Peak AC current in the drop is 380.2 A. *Action:* a
-   configuration fix, lower the commanded current ceiling or soften the ramp so
-   the car stops bouncing off its own limit.
-4. **21 of 60 channels are flat at zero for the entire drop.** The whole inertial
-   block (`ACC Lat/Long/Vert`, roll/pitch/yaw rate) exists in only **1 of 26
-   files**, which is why the drop has two schemas, so no G traces or driver
-   dynamics are possible. *Action:* same lever as 2023, validate the logger
-   config before the event rather than after.
-5. **The flowrate spikes are inverter EMI, not a scaling error.** 150 of 11,913
-   samples (1.26%) exceed the 0 to 40 range, peaking at 4,132. Evidence: no
-   power-of-two structure (zero samples at 255/256/1023/1024/4095/4096/65535, and
-   4,132 is not 4,096); the implied pulse rate is **30,990 Hz, 103 times the
-   transducer's mechanical ceiling** and 3.87 times a typical 8 kHz inverter PWM;
-   **100%** of spikes occur in moving sessions and 0% while parked; and spikes
-   coincide with hard switching (`MC Volts` 311 vs 250, `Motor RPM` 1,358 vs
-   799). *Action:* reject any pulse interval below 1 ms in firmware, switch from
-   period-based to fixed-window pulse counting, and fit the 1 to 2.2 kohm pull-up
-   the sensor requires. A rolling median cleans the existing logs.
-6. **`CAN1 ERRORS` is never zero.** It takes only the values 16, 19, 24 and 32,
-   stepping by 8, which is the CAN transmit-error-counter increment, and it
-   decays as well as rises, so it is a live counter readout rather than a
-   cumulative total. It stays far below the 96 warning and 128 error-passive
-   thresholds, so the bus works. But `CAN2 ERRORS` is exactly 0 on every row, so
-   a correctly built bus in this same car does sit at zero. *Action:* check
-   termination (about 60 ohms across CAN-H/L unpowered), stub lengths, and bit
-   timing on the inverter bus.
+Six actions, in the order I would take them.
+
+1. **Check pump duty and bleed the loop.** Flow is at 40% of the cold-plate
+   minimum and reads zero 13.9% of the time the motor turns. The pump is the
+   suspect, not the radiator core.
+2. **Treat a session block as one continuous thermal event.** Controlling for run
+   duration, start temperature predicts peak temperature at
+   **partial r = +0.897, p < 0.0001** (N=16). Mean within-run rise is **2.4 C**;
+   between-run cooling is **0.10 C per idle minute, p = 0.27**, which is zero.
+   The car does not shed heat while parked.
+3. **Lower the commanded current ceiling or soften the ramp.** DTI fault 4 is
+   absolute overcurrent: 79 samples across 7 sessions, and in **100%** of them AC
+   current collapses to 0 A while the bus holds 319 V. A real torque cut that
+   self-clears in ~100 ms.
+4. **Validate the logger config before the event, not after.** Twenty-one dead
+   channels and a missing inertial block are the same lever as 2023.
+5. **Reject pulse intervals under 1 ms and count over a fixed window instead of
+   measuring period.** The flowrate spikes are inverter EMI: 150 samples (1.26%)
+   exceed the 0 to 40 range with no power-of-two structure, the implied pulse
+   rate is **30,990 Hz, 103 times the transducer's ceiling** and 3.87 times an
+   8 kHz PWM, and **100%** occur while moving. Fit the 1 to 2.2 kohm pull-up too.
+6. **Check termination, stub lengths and bit timing on the inverter bus.**
+   `CAN1 ERRORS` takes 16, 19, 24 and 32, stepping by 8, the
+   transmit-error-counter increment. It stays below the 96 warning threshold, so
+   the bus works, but `CAN2 ERRORS` is 0 on every row, so a correct bus on this
+   car does read zero.
+
+**One to identify, not act on.** The 12 V rail runs 13.24 to 14.82 V and exceeds
+14.6 V on 11.2% of samples: normal for lead-acid, over cell maximum for LiFePO4.
+Find out which is fitted.
 
 ### What this dataset cannot tell you
 
-The whole drive day (19.8 min) is **shorter than a single endurance run**. The
-2026 FSAE Electric endurance at Michigan ran 21.9 to 31.7 minutes over 22 km,
-and about 40% of entrants did not finish it (23 of 39 finished in 2026, 18 of 30
-in 2025). The longest run here is 229 s, roughly 3.8 endurance laps.
+The whole drive day is shorter than one endurance run. FSAE Electric 2026
+endurance took 21.9 to 31.7 minutes over 22 km and 16 of 39 entrants did not
+finish it; the longest run here is 229 s. So this covers Acceleration, Skidpad
+and Autocross, 300 of 675 dynamic points, and none of Endurance (275) or
+Efficiency (100).
 
-So this data **fully covers** Acceleration (3.7 s), Skidpad (4.8 s) and Autocross
-(43.9 s), which is 300 of 675 dynamic points. It covers **none** of Endurance
-(275) or Efficiency (100).
+It cannot answer the cooling question either. Exponential fits for a thermal time
+constant hit the solver bound on 9 of 13 runs. Depending on whether tau is 300,
+480 or 900 s, the same 229 s run projects a steady-state motor temperature of 66,
+75 or 94 C. Short runs falsify cooling adequacy; they cannot validate it. Every
+peak temperature here is a lower bound.
 
-Thermally it is worse than that. Exponential fits for a thermal time constant
-hit the solver bound on 9 of 13 runs: 229 s is too short to identify a time
-constant that is plausibly several hundred seconds. Depending on whether tau is
-300, 480 or 900 s, the same 229 s run projects a steady-state motor temperature
-of 66, 75 or 94 C, and a controller temperature of 66, 71 or 82 C. That last
-figure crosses the 80 C ceiling common to Bamocar and Cascadia units.
-**Short runs can falsify cooling adequacy. They cannot validate it.** Every peak
-temperature here is a lower bound, not an estimate.
+Two changes fix that: run one deliberate 22 km endurance simulation, and log bus
+voltage and current at 100 Hz so the 80 kW limit can be audited over the 100 ms
+window officials use (**EV.3.4.1**). At 10 Hz that window is one sample.
 
-Two changes make the next drive day answer what this one cannot: run at least
-one deliberate 22 km / 25 min endurance simulation, and log DC bus voltage and
-current at 100 Hz or faster so the 80 kW limit can be audited over the 100 ms
-window officials actually use (**EV.3.4.1**). At 10 Hz that window is a single
-sample.
-
-**A caution on the statistics.** With 16 to 21 sessions the critical correlation
-for p < 0.05 is about 0.48, and screening 39 live channels pairwise would be 741
-tests with roughly 37 false positives expected by chance. Worse, per-session
-maxima are confounded by session length, since longer sessions have higher
-maxima on sampling grounds alone. An earlier draft of this report claimed a
-22.9 C-per-kWh heating relationship; controlling for duration collapses it from
-r = +0.43 to **partial r = +0.07, p = 0.81**, so it was duration masquerading as
-physics and has been withdrawn. Only the heat-soak result survives that control.
-Treat everything here as hypothesis-generating for the next test day.
+**On the statistics.** At N=16 to 21 the critical correlation is about 0.48 and
+per-session maxima are confounded by session length. An earlier draft claimed
+22.9 C of heating per kWh; controlling for duration collapsed it to
+**r = +0.07, p = 0.81**. Only the heat-soak result survives that control.
 
 ## Reproducing
 
