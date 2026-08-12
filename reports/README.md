@@ -88,6 +88,13 @@ Hardware identified from the channel names: a **DTI HV-500 family inverter**
 from DTI's published CAN map, and its firmware is VESC-derived) driving a
 liquid-cooled motor, with an **Orion BMS 2** on the accumulator.
 
+**The short version.** The car is not hot, it is barely cooled: coolant flow
+runs at about 40% of the inverter's specified minimum, and peak temperature is
+set by how hot the car already was rather than by how it was driven. Nothing in
+this drop is endurance-representative, because the whole day is shorter than one
+endurance run. And three channels are lying, so read the next section before
+trusting any number.
+
 ### Read this first: three channels do not mean what they are named
 
 1. **`Pack_SOC` is not state of charge.** It is byte-identical to
@@ -95,10 +102,9 @@ liquid-cooled motor, with an **Orion BMS 2** on the accumulator.
    99.3%. It rises monotonically 32 to 41 across the day while the car
    discharges 1.36 kWh. It is a pack temperature in Celsius, and the BMS SOC
    message is mis-mapped in the logger config. **Every SOC number in this drop
-   is unusable.** The `SOC Drop %` measure is now hidden and renamed
-   `SOC Drop % (INVALID)`, and the EV Drive Day card that used it has been
-   replaced with `Median Flowrate`. The screenshot below predates that swap and
-   still shows the old card.
+   is unusable.** The `SOC Drop %` measure is hidden and renamed
+   `SOC Drop % (INVALID)`, and the EV Drive Day card that used it now shows
+   `Median Flowrate` instead.
 2. **`Fault Code` is mostly not a fault.** It takes three values: 0, 2 and 4.
    Code 2 is DTI "Undervoltage", which is what the inverter reports when it is
    awake on low voltage and the tractive system is not energized. Conditioning
@@ -123,6 +129,14 @@ value 160 is Logging + Stop Logging, the idle paddock state, not an alarm.
 ### EV Drive Day
 
 ![EV Drive Day](ev-drive-day.png)
+
+This is the shape of the evening: 21 sessions between 17:55 and 21:59, almost
+all of them under a minute. One 3.8-minute run stands alone in the middle, and
+the first four bars carry no motor RPM at all. Channel health steps up from
+about 28% to about 65% after the fourth session, which is not the wiring
+improving, it is the tractive system coming alive. Peak AC current sits at
+roughly 3.25 times peak DC on every real run, which is the normal signature of
+a field-oriented-control inverter.
 
 **The headline track time is inflated.** Of 19.8 min logged, the tractive system
 is live for 15.6 min and the motor actually turns for **11.7 min (59%)**. Four
@@ -175,6 +189,12 @@ whether this matters.
 
 ![EV Thermal](ev-thermal.png)
 
+Read the two temperature charts together. Drivetrain temps climb through the
+day and never come back down, and radiator inlet tracks outlet within a couple
+of degrees for every session, so the two bars in the right-hand chart sit almost
+on top of each other. The flowrate chart is nearly empty because the median is 4
+and the axis is scaled by a 4,132 spike.
+
 Absolute temperatures are comfortable. Motor peaks **61.9 C** against Emrax's
 120 C winding limit and AMK's 125 C derate onset; controller peaks **68.9 C**;
 pack peaks **41 C** against the hard **60 C** ceiling in FSAE **EV.7.5.2**.
@@ -212,6 +232,8 @@ it equals heat load divided by mass flow.
 ### EV Findings
 
 ![EV Findings](ev-findings.png)
+
+Six things to act on, in the order I would act on them.
 
 1. **Peak temperature is set by heat soak, not by driving.** Controlling for run
    duration, the correlation between a run's starting motor temperature and its
